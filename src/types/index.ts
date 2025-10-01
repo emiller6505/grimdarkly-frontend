@@ -47,6 +47,7 @@ export interface Weapon {
 export interface UnitReference {
   id: number;
   name: string;
+  faction: string;
 }
 
 export interface WeaponReference {
