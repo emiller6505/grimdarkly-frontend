@@ -34,7 +34,7 @@ const WeaponDetail = () => {
   const getWeaponTypeColor = (weaponType: string) => {
     switch (weaponType) {
       case 'MELEE':
-        return 'badge-danger';
+        return 'badge-melee';
       case 'RANGED':
         return 'badge-primary';
       default:

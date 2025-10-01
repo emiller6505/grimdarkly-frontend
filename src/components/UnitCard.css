@@ -85,20 +85,30 @@
   margin-bottom: var(--spacing-sm);
 }
 
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xs);
-}
-
-.stat-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-xs);
+.unit-stats-table {
+  width: 100%;
+  border-collapse: collapse;
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.unit-stats-table th,
+.unit-stats-table td {
+  padding: var(--spacing-xs);
+  text-align: center;
+  border-right: 1px solid var(--border-color);
+}
+
+.unit-stats-table th:last-child,
+.unit-stats-table td:last-child {
+  border-right: none;
+}
+
+.unit-stats-table th {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .unit-card .stat-label {
@@ -212,8 +222,13 @@
     align-items: flex-start;
   }
   
-  .stat-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .unit-card .unit-stats-table {
+    font-size: 0.8rem;
+  }
+  
+  .unit-card .unit-stats-table th,
+  .unit-card .unit-stats-table td {
+    padding: var(--spacing-xs) 2px;
   }
   
   .weapons-list,

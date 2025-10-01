@@ -41,32 +41,28 @@ const UnitCard = ({ unit }: UnitCardProps) => {
       </div>
 
       <div className="unit-stats">
-        <div className="stat-grid">
-          <div className="stat-item">
-            <span className="stat-label">M</span>
-            <span className="stat-value">{formatStat(unit.movement)}"</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">T</span>
-            <span className="stat-value">{unit.toughness}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Sv</span>
-            <span className="stat-value">{unit.save}+</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">W</span>
-            <span className="stat-value">{unit.wounds}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Ld</span>
-            <span className="stat-value">{unit.leadership}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">OC</span>
-            <span className="stat-value">{unit.oc}</span>
-          </div>
-        </div>
+        <table className="unit-stats-table">
+          <thead>
+            <tr>
+              <th>M</th>
+              <th>T</th>
+              <th>Sv</th>
+              <th>W</th>
+              <th>Ld</th>
+              <th>OC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{formatStat(unit.movement)}"</td>
+              <td>{unit.toughness}</td>
+              <td>{unit.save}+</td>
+              <td>{unit.wounds}</td>
+              <td>{unit.leadership}</td>
+              <td>{unit.oc}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       {unit.weapons.length > 0 && (

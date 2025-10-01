@@ -10,7 +10,7 @@ const WeaponCard = ({ weapon }: WeaponCardProps) => {
   const getWeaponTypeColor = (weaponType: string) => {
     switch (weaponType) {
       case 'MELEE':
-        return 'badge-danger';
+        return 'badge-melee';
       case 'RANGED':
         return 'badge-primary';
       default:
@@ -43,36 +43,32 @@ const WeaponCard = ({ weapon }: WeaponCardProps) => {
       </div>
 
       <div className="weapon-stats">
-        <div className="stat-grid">
-          {weapon.weaponType === 'RANGED' && (
-            <div className="stat-item">
-              <span className="stat-label">Range</span>
-              <span className="stat-value">{formatStat(weapon.range)}"</span>
-            </div>
-          )}
-          <div className="stat-item">
-            <span className="stat-label">A</span>
-            <span className="stat-value">{weapon.attacks}</span>
-          </div>
-          {weapon.weaponType === 'MELEE' && (
-            <div className="stat-item">
-              <span className="stat-label">WS</span>
-              <span className="stat-value">{formatStat(weapon.skill)}+</span>
-            </div>
-          )}
-          <div className="stat-item">
-            <span className="stat-label">S</span>
-            <span className="stat-value">{weapon.strength}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">AP</span>
-            <span className="stat-value">{formatAP(weapon.ap)}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">D</span>
-            <span className="stat-value">{weapon.damage}</span>
-          </div>
-        </div>
+        <table className="weapon-stats-table">
+          <thead>
+            <tr>
+              {weapon.weaponType === 'RANGED' && <th>Range</th>}
+              <th>A</th>
+              {weapon.weaponType === 'MELEE' && <th>WS</th>}
+              <th>S</th>
+              <th>AP</th>
+              <th>D</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {weapon.weaponType === 'RANGED' && (
+                <td>{formatStat(weapon.range)}"</td>
+              )}
+              <td>{weapon.attacks}</td>
+              {weapon.weaponType === 'MELEE' && (
+                <td>{formatStat(weapon.skill)}+</td>
+              )}
+              <td>{weapon.strength}</td>
+              <td>{formatAP(weapon.ap)}</td>
+              <td>{weapon.damage}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       {weapon.abilities.length > 0 && (

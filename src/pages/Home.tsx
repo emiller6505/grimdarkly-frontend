@@ -19,7 +19,7 @@ const Home = () => {
             <span className="stat-label">Weapons</span>
           </div>
           <div className="stat">
-            <span className="stat-number">25+</span>
+            <span className="stat-number">25</span>
             <span className="stat-label">Factions</span>
           </div>
         </div>

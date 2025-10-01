@@ -330,8 +330,13 @@
   color: white;
 }
 
+.weapon-detail-header .badge-melee {
+  background-color: #b91c1c;
+  color: white;
+}
+
 .weapon-detail-header .badge-primary {
-  background-color: var(--accent-blue);
+  background-color: #0d9488;
   color: white;
 }
 
