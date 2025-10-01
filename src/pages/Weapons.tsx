@@ -38,7 +38,7 @@ const Weapons = () => {
     <div className="weapons-page">
       <div className="page-header">
         <h1>Weapons</h1>
-        <p>Search and explore Warhammer 40K weapons with detailed stats and abilities</p>
+        <p>Search and explore Warhammer 40K weapons with detailed stats and abilities.</p>
       </div>
 
       <div className="search-section">

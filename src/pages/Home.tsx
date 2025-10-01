@@ -7,7 +7,7 @@ const Home = () => {
       <div className="hero">
         <h1>Welcome to Grimdark Grimoire</h1>
         <p className="hero-subtitle">
-          Your comprehensive Warhammer 40K database for units, weapons, and factions
+          Your comprehensive Warhammer 40K database for units, weapons, and factions.
         </p>
         <div className="hero-stats">
           <div className="stat">
@@ -29,7 +29,7 @@ const Home = () => {
         <h2>Explore the Grim Darkness</h2>
         <div className="grid grid-cols-3">
           <div className="feature-card">
-            <div className="feature-icon">⚔️</div>
+            <div className="feature-icon">👥</div>
             <h3>Units</h3>
             <p>
               Browse and search through thousands of Warhammer 40K units with detailed stats, 
@@ -41,7 +41,7 @@ const Home = () => {
           </div>
 
           <div className="feature-card">
-            <div className="feature-icon">🔫</div>
+            <div className="feature-icon">⚔️</div>
             <h3>Weapons</h3>
             <p>
               Discover the arsenal of the 41st millennium with comprehensive weapon stats, 

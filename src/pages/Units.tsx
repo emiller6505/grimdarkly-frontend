@@ -38,7 +38,7 @@ const Units = () => {
     <div className="units-page">
       <div className="page-header">
         <h1>Units</h1>
-        <p>Search and explore Warhammer 40K units with detailed stats and abilities</p>
+        <p>Search and explore Warhammer 40K units with detailed stats and abilities.</p>
       </div>
 
       <div className="search-section">
