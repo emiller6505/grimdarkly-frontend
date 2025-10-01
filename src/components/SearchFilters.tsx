@@ -130,7 +130,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             <input
               type="text"
               id="unit-name"
-              placeholder="e.g., Space Marine, Intercessor"
+              placeholder="e.g. Space Marine, Intercessor"
               value={unitFilters.name || ''}
               onChange={(e) => handleInputChange('name', e.target.value)}
             />
@@ -141,7 +141,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             <input
               type="text"
               id="faction"
-              placeholder="e.g., Space Marines, Chaos"
+              placeholder="e.g. Dark Angels, World Eaters"
               value={unitFilters.faction || ''}
               onChange={(e) => handleInputChange('faction', e.target.value)}
             />
@@ -166,7 +166,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             <MultiKeywordInput
               appliedKeywords={appliedKeywords}
               onKeywordsChange={handleKeywordsChange}
-              placeholder="e.g., Infantry, Vehicle (units must have ALL keywords)"
+              placeholder="e.g. Infantry, Vehicle"
             />
           </div>
 
@@ -296,7 +296,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
           <input
             type="text"
             id="name"
-            placeholder="e.g., Storm Bolter, Chainsword"
+            placeholder="e.g. Storm Bolter, Chainsword"
             value={weaponFilters.name || ''}
             onChange={(e) => handleInputChange('name', e.target.value)}
           />
@@ -344,7 +344,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
           <input
             type="number"
             id="ap"
-            placeholder="e.g., -1, -2"
+            placeholder="e.g. -1, -2"
             value={weaponFilters.ap || ''}
             onChange={(e) => handleInputChange('ap', e.target.value ? parseInt(e.target.value) : undefined)}
             onKeyDown={handleNumberKeyDown}
@@ -356,7 +356,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
           <input
             type="text"
             id="attacks"
-            placeholder="e.g., 2, D6, D3+1"
+            placeholder="e.g. 2, D6, D3+1"
             value={weaponFilters.attacks || ''}
             onChange={(e) => handleInputChange('attacks', e.target.value)}
           />
