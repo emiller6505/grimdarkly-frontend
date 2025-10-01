@@ -12,7 +12,7 @@ const UnitCard = ({ unit }: UnitCardProps) => {
       case 'EPIC_HERO':
         return 'badge-danger';
       case 'CHARACTER':
-        return 'badge-primary';
+        return 'badge-secondary';
       case 'BATTLELINE':
         return 'badge-secondary';
       default:
