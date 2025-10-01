@@ -1,0 +1,181 @@
+.weapon-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.weapon-card:hover {
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.weapon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-md);
+}
+
+.weapon-name {
+  margin: 0;
+  flex: 1;
+}
+
+.weapon-name a {
+  color: var(--accent-gold);
+  text-decoration: none;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.weapon-name a:hover {
+  color: var(--accent-blue);
+}
+
+.weapon-badges {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.weapon-stats {
+  margin-bottom: var(--spacing-md);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.weapon-abilities,
+.weapon-units {
+  margin-bottom: var(--spacing-md);
+}
+
+.weapon-abilities h4,
+.weapon-units h4 {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.abilities-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.ability-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  font-size: 0.875rem;
+}
+
+.ability-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.ability-value {
+  color: var(--accent-gold);
+  font-size: 0.75rem;
+}
+
+.ability-item.more {
+  color: var(--text-muted);
+  font-style: italic;
+  justify-content: center;
+}
+
+.units-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.unit-tag {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.unit-tag.more {
+  background-color: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+}
+
+.weapon-footer {
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.weapon-footer .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .weapon-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .units-list {
+    flex-direction: column;
+  }
+  
+  .unit-tag {
+    text-align: center;
+  }
+}

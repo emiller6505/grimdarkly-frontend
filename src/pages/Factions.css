@@ -1,0 +1,123 @@
+.factions-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.page-header h1 {
+  color: var(--accent-gold);
+  margin-bottom: var(--spacing-md);
+}
+
+.page-header p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.factions-summary {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.summary-stat {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  min-width: 150px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.factions-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.faction-category {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.category-title {
+  color: var(--accent-gold);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.5rem;
+  text-align: center;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.factions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.error-message {
+  background-color: rgba(220, 38, 38, 0.1);
+  border: 1px solid var(--accent-red);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+.error-message p {
+  color: var(--accent-red);
+  margin: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .summary-stats {
+    gap: var(--spacing-md);
+  }
+  
+  .summary-stat {
+    min-width: 120px;
+    padding: var(--spacing-md);
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .factions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .faction-category {
+    padding: var(--spacing-lg);
+  }
+}
