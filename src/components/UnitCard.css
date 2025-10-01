@@ -1,8 +1,8 @@
 .unit-card {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
   transition: all 0.3s ease;
   height: 100%;
   display: flex;
@@ -21,8 +21,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: var(--spacing-md);
-  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  gap: var(--spacing-sm);
   position: relative;
   z-index: 1;
 }
@@ -33,15 +33,15 @@
   min-width: 0; /* Prevents flex item from overflowing */
 }
 
-.unit-name a {
+.unit-card .unit-name a {
   color: var(--accent-gold);
   text-decoration: none;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
-.unit-name a:hover {
+.unit-card .unit-name a:hover {
   color: var(--accent-blue);
 }
 
@@ -54,8 +54,8 @@
 }
 
 .unit-faction {
-  margin-bottom: var(--spacing-md);
-  padding-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -66,13 +66,13 @@
 .unit-card .unit-faction .faction-name {
   color: var(--text-secondary);
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 
 /* More specific selector for faction category */
 .unit-card .unit-faction .faction-category {
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   background-color: var(--bg-tertiary);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-sm);
@@ -82,53 +82,54 @@
 }
 
 .unit-stats {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
 }
 
 .stat-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-xs);
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
 }
 
-.stat-label {
-  font-size: 0.75rem;
-  font-weight: 600;
+.unit-card .stat-label {
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.stat-value {
-  font-size: 0.875rem;
-  font-weight: 600;
+.unit-card .stat-value {
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-primary);
 }
 
 .unit-weapons,
 .unit-keywords,
 .unit-configurations {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
-.unit-weapons h4,
-.unit-keywords h4,
-.unit-configurations h4 {
-  font-size: 0.875rem;
+.unit-card .unit-weapons h4,
+.unit-card .unit-keywords h4,
+.unit-card .unit-configurations h4 {
+  font-size: 0.8rem;
   color: var(--text-muted);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
 .weapons-list,
@@ -141,11 +142,11 @@
 .weapon-tag,
 .keyword-tag {
   display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: 2px var(--spacing-xs);
   background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   border: 1px solid var(--border-color);
 }
 
@@ -166,21 +167,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-xs);
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
 }
-
+.configuration-item span {
+  font-size: 0.8rem;
+}
 .config-description {
   color: var(--text-secondary);
   flex: 1;
 }
 
-.config-points {
+.unit-card .config-points {
   color: var(--accent-gold);
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 0.8rem;
   margin-left: var(--spacing-sm);
 }
 
@@ -192,7 +196,7 @@
 
 .unit-footer {
   margin-top: auto;
-  padding-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
   border-top: 1px solid var(--border-color);
 }
 
