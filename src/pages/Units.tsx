@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { unitApi } from '../services/api';
 import type { Unit, UnitSearchParams } from '../types';
 import UnitCard from '../components/UnitCard';
 import SearchFilters from '../components/SearchFilters';
 import LoadingSpinner from '../components/LoadingSpinner';
+import SortComponent, { type SortState, type SortOption } from '../components/SortComponent';
 import './Units.css';
 
 const Units = () => {
@@ -11,6 +12,17 @@ const Units = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [sortState, setSortState] = useState<SortState>({ criteria: 'name', direction: 'asc' });
+
+  const sortOptions: SortOption[] = [
+    { value: 'name', label: 'Name (default)' },
+    { value: 'toughness', label: 'Toughness' },
+    { value: 'wounds', label: 'Wounds' },
+    { value: 'movement', label: 'Movement' },
+    { value: 'save', label: 'Save' },
+    { value: 'leadership', label: 'Leadership' },
+    { value: 'oc', label: 'Objective Control' }
+  ];
 
   const handleSearch = async (params: UnitSearchParams) => {
     setLoading(true);
@@ -33,6 +45,56 @@ const Units = () => {
     setHasSearched(false);
     setError(null);
   };
+
+  const handleSortChange = (newSortState: SortState) => {
+    setSortState(newSortState);
+  };
+
+  const sortedUnits = useMemo(() => {
+    if (!units.length) return units;
+
+    return [...units].sort((a, b) => {
+      let aValue: any;
+      let bValue: any;
+
+      switch (sortState.criteria) {
+        case 'name':
+          aValue = a.name.toLowerCase();
+          bValue = b.name.toLowerCase();
+          break;
+        case 'toughness':
+          aValue = a.toughness;
+          bValue = b.toughness;
+          break;
+        case 'wounds':
+          aValue = a.wounds;
+          bValue = b.wounds;
+          break;
+        case 'movement':
+          aValue = a.movement;
+          bValue = b.movement;
+          break;
+        case 'save':
+          aValue = a.save;
+          bValue = b.save;
+          break;
+        case 'leadership':
+          aValue = a.leadership;
+          bValue = b.leadership;
+          break;
+        case 'oc':
+          aValue = a.oc;
+          bValue = b.oc;
+          break;
+        default:
+          return 0;
+      }
+
+      if (aValue < bValue) return sortState.direction === 'asc' ? -1 : 1;
+      if (aValue > bValue) return sortState.direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [units, sortState]);
 
   return (
     <div className="units-page">
@@ -74,14 +136,21 @@ const Units = () => {
       {!loading && units.length > 0 && (
         <div className="results-section">
           <div className="results-header">
-            <h2>Search Results</h2>
-            <p className="results-count">
-              Found {units.length} unit{units.length !== 1 ? 's' : ''}
-            </p>
+            <div className="results-title">
+              <h2>Search Results</h2>
+              <p className="results-count">
+                Found {units.length} unit{units.length !== 1 ? 's' : ''}
+              </p>
+            </div>
+            <SortComponent
+              sortOptions={sortOptions}
+              onSortChange={handleSortChange}
+              currentSort={sortState}
+            />
           </div>
           
           <div className="units-grid">
-            {units.map((unit) => (
+            {sortedUnits.map((unit) => (
               <UnitCard key={unit.id} unit={unit} />
             ))}
           </div>

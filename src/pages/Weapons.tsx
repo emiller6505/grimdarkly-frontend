@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { weaponApi } from '../services/api';
 import type { Weapon, WeaponSearchParams } from '../types';
 import WeaponCard from '../components/WeaponCard';
 import SearchFilters from '../components/SearchFilters';
 import LoadingSpinner from '../components/LoadingSpinner';
+import SortComponent, { type SortState, type SortOption } from '../components/SortComponent';
 import './Weapons.css';
 
 const Weapons = () => {
@@ -11,6 +12,17 @@ const Weapons = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [sortState, setSortState] = useState<SortState>({ criteria: 'name', direction: 'asc' });
+
+  const sortOptions: SortOption[] = [
+    { value: 'name', label: 'Name (default)' },
+    { value: 'weaponType', label: 'Type' },
+    { value: 'range', label: 'Range' },
+    { value: 'attacks', label: 'Attacks' },
+    { value: 'strength', label: 'Strength' },
+    { value: 'ap', label: 'Armor Penetration' },
+    { value: 'damage', label: 'Damage' }
+  ];
 
   const handleSearch = async (params: WeaponSearchParams) => {
     setLoading(true);
@@ -33,6 +45,57 @@ const Weapons = () => {
     setHasSearched(false);
     setError(null);
   };
+
+  const handleSortChange = (newSortState: SortState) => {
+    setSortState(newSortState);
+  };
+
+  const sortedWeapons = useMemo(() => {
+    if (!weapons.length) return weapons;
+
+    return [...weapons].sort((a, b) => {
+      let aValue: any;
+      let bValue: any;
+
+      switch (sortState.criteria) {
+        case 'name':
+          aValue = a.name.toLowerCase();
+          bValue = b.name.toLowerCase();
+          break;
+        case 'weaponType':
+          aValue = a.weaponType.toLowerCase();
+          bValue = b.weaponType.toLowerCase();
+          break;
+        case 'range':
+          aValue = a.range || 0;
+          bValue = b.range || 0;
+          break;
+        case 'attacks':
+          // Convert attacks to number for sorting (handle dice notation)
+          aValue = typeof a.attacks === 'string' ? parseInt(a.attacks) || 0 : a.attacks;
+          bValue = typeof b.attacks === 'string' ? parseInt(b.attacks) || 0 : b.attacks;
+          break;
+        case 'strength':
+          aValue = a.strength;
+          bValue = b.strength;
+          break;
+        case 'ap':
+          aValue = a.ap;
+          bValue = b.ap;
+          break;
+        case 'damage':
+          aValue = a.damage;
+          bValue = b.damage;
+          break;
+        default:
+          return 0;
+      }
+
+      if (aValue < bValue) return sortState.direction === 'asc' ? -1 : 1;
+      if (aValue > bValue) return sortState.direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [weapons, sortState]);
 
   return (
     <div className="weapons-page">
@@ -74,14 +137,21 @@ const Weapons = () => {
       {!loading && weapons.length > 0 && (
         <div className="results-section">
           <div className="results-header">
-            <h2>Search Results</h2>
-            <p className="results-count">
-              Found {weapons.length} weapon{weapons.length !== 1 ? 's' : ''}
-            </p>
+            <div className="results-title">
+              <h2>Search Results</h2>
+              <p className="results-count">
+                Found {weapons.length} weapon{weapons.length !== 1 ? 's' : ''}
+              </p>
+            </div>
+            <SortComponent
+              sortOptions={sortOptions}
+              onSortChange={handleSortChange}
+              currentSort={sortState}
+            />
           </div>
           
           <div className="weapons-grid">
-            {weapons.map((weapon) => (
+            {sortedWeapons.map((weapon) => (
               <WeaponCard key={weapon.id} weapon={weapon} />
             ))}
           </div>
