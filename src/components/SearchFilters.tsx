@@ -41,6 +41,26 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
     }
   };
 
+  const handleNumberKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Allow: backspace, delete, tab, escape, enter, home, end, left, right, up, down
+    if ([8, 9, 27, 13, 46, 35, 36, 37, 38, 39, 40].indexOf(e.keyCode) !== -1 ||
+        // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+        (e.keyCode === 65 && e.ctrlKey === true) ||
+        (e.keyCode === 67 && e.ctrlKey === true) ||
+        (e.keyCode === 86 && e.ctrlKey === true) ||
+        (e.keyCode === 88 && e.ctrlKey === true) ||
+        // Allow: minus sign (for negative numbers)
+        (e.keyCode === 189 || e.keyCode === 109) ||
+        // Allow: numbers 0-9
+        (e.keyCode >= 48 && e.keyCode <= 57) ||
+        // Allow: numpad numbers 0-9
+        (e.keyCode >= 96 && e.keyCode <= 105)) {
+      return;
+    }
+    // Prevent all other keys
+    e.preventDefault();
+  };
+
   const executeSearch = () => {
     if (isSubmitting || loading) return;
     
@@ -159,6 +179,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               max="10"
               value={unitFilters.minToughness || ''}
               onChange={(e) => handleInputChange('minToughness', e.target.value ? parseInt(e.target.value) : undefined)}
+              onKeyDown={handleNumberKeyDown}
             />
           </div>
 
@@ -171,6 +192,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               max="10"
               value={unitFilters.maxToughness || ''}
               onChange={(e) => handleInputChange('maxToughness', e.target.value ? parseInt(e.target.value) : undefined)}
+              onKeyDown={handleNumberKeyDown}
             />
           </div>
 
@@ -182,6 +204,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               min="1"
               value={unitFilters.minWounds || ''}
               onChange={(e) => handleInputChange('minWounds', e.target.value ? parseInt(e.target.value) : undefined)}
+              onKeyDown={handleNumberKeyDown}
             />
           </div>
 
@@ -193,11 +216,12 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               min="1"
               value={unitFilters.maxWounds || ''}
               onChange={(e) => handleInputChange('maxWounds', e.target.value ? parseInt(e.target.value) : undefined)}
+              onKeyDown={handleNumberKeyDown}
             />
           </div>
 
           <div className="filter-group">
-            <label htmlFor="minMovement">Min Movement</label>
+            <label htmlFor="minMovement">Min Movement (inches)</label>
             <input
               type="number"
               id="minMovement"
@@ -205,11 +229,12 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               max="20"
               value={unitFilters.minMovement || ''}
               onChange={(e) => handleInputChange('minMovement', e.target.value ? parseInt(e.target.value) : undefined)}
+              onKeyDown={handleNumberKeyDown}
             />
           </div>
 
           <div className="filter-group">
-            <label htmlFor="maxMovement">Max Movement</label>
+            <label htmlFor="maxMovement">Max Movement (inches)</label>
             <input
               type="number"
               id="maxMovement"
@@ -217,6 +242,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               max="20"
               value={unitFilters.maxMovement || ''}
               onChange={(e) => handleInputChange('maxMovement', e.target.value ? parseInt(e.target.value) : undefined)}
+              onKeyDown={handleNumberKeyDown}
             />
           </div>
         </div>
@@ -297,6 +323,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             min="0"
             value={weaponFilters.minRange || ''}
             onChange={(e) => handleInputChange('minRange', e.target.value ? parseInt(e.target.value) : undefined)}
+            onKeyDown={handleNumberKeyDown}
           />
         </div>
 
@@ -308,6 +335,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             min="0"
             value={weaponFilters.maxRange || ''}
             onChange={(e) => handleInputChange('maxRange', e.target.value ? parseInt(e.target.value) : undefined)}
+            onKeyDown={handleNumberKeyDown}
           />
         </div>
 
@@ -319,6 +347,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             placeholder="e.g., -1, -2"
             value={weaponFilters.ap || ''}
             onChange={(e) => handleInputChange('ap', e.target.value ? parseInt(e.target.value) : undefined)}
+            onKeyDown={handleNumberKeyDown}
           />
         </div>
 
