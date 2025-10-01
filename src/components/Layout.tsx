@@ -62,7 +62,7 @@ const Layout = ({ children }: LayoutProps) => {
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
-            <p>&copy; 2024 Grimdark Grimoire. Warhammer 40K data provided for reference purposes.</p>
+            <p>Game data is provided for reference purposes only under fair use.</p>
             <p className="text-muted">
               This is an unofficial fan project and is not affiliated with Games Workshop.
             </p>
