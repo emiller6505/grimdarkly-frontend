@@ -102,7 +102,6 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               onChange={(e) => handleInputChange('unitType', e.target.value || undefined)}
             >
               <option value="">Any Type</option>
-              <option value="EPIC_HERO">Epic Hero</option>
               <option value="CHARACTER">Character</option>
               <option value="BATTLELINE">Battleline</option>
               <option value="OTHER">Other</option>

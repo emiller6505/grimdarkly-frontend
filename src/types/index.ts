@@ -91,7 +91,7 @@ export interface Unit {
   wounds: number;
   leadership: number;
   oc: number;
-  unitType: 'EPIC_HERO' | 'CHARACTER' | 'BATTLELINE' | 'OTHER';
+  unitType: 'CHARACTER' | 'BATTLELINE' | 'OTHER';
   faction: Faction;
   weapons: WeaponReference[];
   unitAbilities: UnitAbility[];
@@ -129,7 +129,7 @@ export interface ErrorResponse {
 export interface UnitSearchParams {
   name?: string;
   faction?: string;
-  unitType?: 'EPIC_HERO' | 'CHARACTER' | 'BATTLELINE' | 'OTHER';
+  unitType?: 'CHARACTER' | 'BATTLELINE' | 'OTHER';
   keyword?: string;
   minToughness?: number;
   maxToughness?: number;

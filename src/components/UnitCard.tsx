@@ -9,8 +9,6 @@ interface UnitCardProps {
 const UnitCard = ({ unit }: UnitCardProps) => {
   const getUnitTypeColor = (unitType: string) => {
     switch (unitType) {
-      case 'EPIC_HERO':
-        return 'badge-danger';
       case 'CHARACTER':
         return 'badge-secondary';
       case 'BATTLELINE':

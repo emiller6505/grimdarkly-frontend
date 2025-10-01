@@ -32,8 +32,6 @@ const UnitDetail = () => {
 
   const getUnitTypeColor = (unitType: string) => {
     switch (unitType) {
-      case 'EPIC_HERO':
-        return 'badge-danger';
       case 'CHARACTER':
         return 'badge-primary';
       case 'BATTLELINE':

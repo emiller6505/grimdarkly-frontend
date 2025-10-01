@@ -97,7 +97,7 @@ const Units = () => {
             <ul>
               <li>Search by name: "Space Marine" or "Intercessor"</li>
               <li>Filter by faction: "Space Marines", "Chaos", "Orks"</li>
-              <li>Filter by type: "BATTLELINE", "CHARACTER", "EPIC_HERO"</li>
+              <li>Filter by type: "BATTLELINE", "CHARACTER", "OTHER"</li>
               <li>Filter by keywords: "Infantry", "Vehicle", "Monster"</li>
               <li>Filter by stats: Toughness, Wounds, Movement ranges</li>
             </ul>
