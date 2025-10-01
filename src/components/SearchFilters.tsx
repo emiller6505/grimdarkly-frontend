@@ -14,6 +14,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
   const [unitFilters, setUnitFilters] = useState<UnitSearchParams>({});
   const [weaponFilters, setWeaponFilters] = useState<WeaponSearchParams>({});
   const [appliedKeywords, setAppliedKeywords] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string | number | undefined) => {
     if (type === 'units') {
@@ -40,12 +41,30 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const executeSearch = () => {
+    if (isSubmitting || loading) return;
+    
+    setIsSubmitting(true);
     if (type === 'units') {
       onSearch(unitFilters);
     } else {
       onSearch(weaponFilters);
+    }
+    
+    // Reset the flag after a short delay
+    setTimeout(() => setIsSubmitting(false), 100);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    executeSearch();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && hasActiveFilters && !loading && !isSubmitting) {
+      e.preventDefault();
+      e.stopPropagation();
+      executeSearch();
     }
   };
 
@@ -63,7 +82,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
 
   if (type === 'units') {
     return (
-      <form className="search-filters" onSubmit={handleSubmit}>
+      <form className="search-filters" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
         <div className="filters-header">
           <h3>Search Units</h3>
           <div className="filters-actions">
@@ -223,7 +242,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
 
   // Weapons filters
   return (
-    <form className="search-filters" onSubmit={handleSubmit}>
+    <form className="search-filters" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
       <div className="filters-header">
         <h3>Search Weapons</h3>
         <div className="filters-actions">
