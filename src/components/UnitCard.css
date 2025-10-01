@@ -167,6 +167,22 @@
   border-color: var(--accent-blue);
 }
 
+.keyword-tag.more.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.keyword-tag.more.clickable:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.keyword-tag.more.clickable:focus {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 1px;
+}
+
 .configurations-list {
   display: flex;
   flex-direction: column;

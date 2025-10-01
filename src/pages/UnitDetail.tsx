@@ -30,16 +30,6 @@ const UnitDetail = () => {
     fetchUnit();
   }, [id]);
 
-  const getUnitTypeColor = (unitType: string) => {
-    switch (unitType) {
-      case 'CHARACTER':
-        return 'badge-primary';
-      case 'BATTLELINE':
-        return 'badge-secondary';
-      default:
-        return '';
-    }
-  };
 
   const formatStat = (value: number | string | undefined) => {
     if (value === undefined || value === null) return '-';
@@ -90,9 +80,11 @@ const UnitDetail = () => {
         <div className="unit-title-section">
           <h1 className="unit-title">{unit.name}</h1>
           <div className="unit-badges">
-            <span className={`badge ${getUnitTypeColor(unit.unitType)}`}>
-              {unit.unitType.replace('_', ' ')}
-            </span>
+            {(unit.unitType === 'CHARACTER' || unit.unitType === 'BATTLELINE') && (
+              <span className="badge">
+                {unit.unitType.replace('_', ' ')}
+              </span>
+            )}
           </div>
         </div>
 

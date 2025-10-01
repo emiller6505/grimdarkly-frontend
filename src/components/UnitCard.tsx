@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Unit } from '../types';
 import './UnitCard.css';
@@ -7,16 +8,7 @@ interface UnitCardProps {
 }
 
 const UnitCard = ({ unit }: UnitCardProps) => {
-  const getUnitTypeColor = (unitType: string) => {
-    switch (unitType) {
-      case 'CHARACTER':
-        return 'badge-secondary';
-      case 'BATTLELINE':
-        return 'badge-secondary';
-      default:
-        return '';
-    }
-  };
+  const [keywordsExpanded, setKeywordsExpanded] = useState(false);
 
   const formatStat = (value: number | string | undefined) => {
     if (value === undefined || value === null) return '-';
@@ -30,9 +22,11 @@ const UnitCard = ({ unit }: UnitCardProps) => {
           <Link to={`/units/${unit.id}`}>{unit.name}</Link>
         </h3>
         <div className="unit-badges">
-          <span className={`badge ${getUnitTypeColor(unit.unitType)}`}>
-            {unit.unitType.replace('_', ' ')}
-          </span>
+          {(unit.unitType === 'CHARACTER' || unit.unitType === 'BATTLELINE') && (
+            <span className="badge">
+              {unit.unitType.replace('_', ' ')}
+            </span>
+          )}
         </div>
       </div>
 
@@ -87,14 +81,41 @@ const UnitCard = ({ unit }: UnitCardProps) => {
         <div className="unit-keywords">
           <h4>Keywords</h4>
           <div className="keywords-list">
-            {unit.keywords.slice(0, 4).map((keyword, index) => (
+            {(keywordsExpanded ? unit.keywords : unit.keywords.slice(0, 4)).map((keyword, index) => (
               <span key={index} className="keyword-tag">
                 {keyword}
               </span>
             ))}
-            {unit.keywords.length > 4 && (
-              <span className="keyword-tag more">
+            {unit.keywords.length > 4 && !keywordsExpanded && (
+              <span 
+                className="keyword-tag more clickable"
+                onClick={() => setKeywordsExpanded(true)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setKeywordsExpanded(true);
+                  }
+                }}
+              >
                 +{unit.keywords.length - 4} more
+              </span>
+            )}
+            {keywordsExpanded && unit.keywords.length > 4 && (
+              <span 
+                className="keyword-tag more clickable"
+                onClick={() => setKeywordsExpanded(false)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setKeywordsExpanded(false);
+                  }
+                }}
+              >
+                Show less
               </span>
             )}
           </div>
