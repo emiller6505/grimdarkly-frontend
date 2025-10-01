@@ -1,0 +1,46 @@
+.multi-keyword-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.applied-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  min-height: 32px;
+  align-items: flex-start;
+}
+
+.keyword-input-field {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.keyword-input-field:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.keyword-input-field::placeholder {
+  color: var(--text-muted);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .applied-keywords {
+    gap: var(--spacing-xs);
+  }
+  
+  .keyword-input-field {
+    font-size: 0.8rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}

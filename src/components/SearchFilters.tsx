@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { UnitSearchParams, WeaponSearchParams } from '../types';
+import MultiKeywordInput from './MultiKeywordInput';
 import './SearchFilters.css';
 
 interface SearchFiltersProps {
@@ -12,6 +13,7 @@ interface SearchFiltersProps {
 const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps) => {
   const [unitFilters, setUnitFilters] = useState<UnitSearchParams>({});
   const [weaponFilters, setWeaponFilters] = useState<WeaponSearchParams>({});
+  const [appliedKeywords, setAppliedKeywords] = useState<string[]>([]);
 
   const handleInputChange = (field: string, value: string | number | undefined) => {
     if (type === 'units') {
@@ -23,6 +25,17 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
       setWeaponFilters(prev => ({
         ...prev,
         [field]: value || undefined
+      }));
+    }
+  };
+
+  const handleKeywordsChange = (keywords: string[]) => {
+    setAppliedKeywords(keywords);
+    if (type === 'units') {
+      setUnitFilters(prev => ({
+        ...prev,
+        keywords: keywords,
+        keyword: keywords.length > 0 ? keywords.join(',') : undefined
       }));
     }
   };
@@ -39,13 +52,14 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
   const handleClear = () => {
     setUnitFilters({});
     setWeaponFilters({});
+    setAppliedKeywords([]);
     onClear();
   };
 
   const currentFilters = type === 'units' ? unitFilters : weaponFilters;
   const hasActiveFilters = Object.values(currentFilters).some(value => 
-    value !== undefined && value !== '' && value !== null
-  );
+    value !== undefined && value !== '' && value !== null && value !== 0
+  ) || appliedKeywords.length > 0;
 
   if (type === 'units') {
     return (
@@ -57,14 +71,14 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               type="button" 
               onClick={handleClear}
               className="btn btn-secondary"
-              disabled={loading}
+              disabled={loading || !hasActiveFilters}
             >
               Clear
             </button>
             <button 
               type="submit" 
               className="btn btn-primary"
-              disabled={loading}
+              disabled={loading || !hasActiveFilters}
             >
               {loading ? 'Searching...' : 'Search'}
             </button>
@@ -109,13 +123,11 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
           </div>
 
           <div className="filter-group">
-            <label htmlFor="keyword">Keyword</label>
-            <input
-              type="text"
-              id="keyword"
-              placeholder="e.g., Infantry, Vehicle"
-              value={unitFilters.keyword || ''}
-              onChange={(e) => handleInputChange('keyword', e.target.value)}
+            <label htmlFor="keywords">Keywords</label>
+            <MultiKeywordInput
+              appliedKeywords={appliedKeywords}
+              onKeywordsChange={handleKeywordsChange}
+              placeholder="e.g., Infantry, Vehicle (units must have ALL keywords)"
             />
           </div>
 
@@ -219,14 +231,14 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             type="button" 
             onClick={handleClear}
             className="btn btn-secondary"
-            disabled={loading}
+            disabled={loading || !hasActiveFilters}
           >
             Clear
           </button>
           <button 
             type="submit" 
             className="btn btn-primary"
-            disabled={loading}
+            disabled={loading || !hasActiveFilters}
           >
             {loading ? 'Searching...' : 'Search'}
           </button>

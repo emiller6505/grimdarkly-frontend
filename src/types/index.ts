@@ -130,7 +130,8 @@ export interface UnitSearchParams {
   name?: string;
   faction?: string;
   unitType?: 'CHARACTER' | 'BATTLELINE' | 'OTHER';
-  keyword?: string;
+  keyword?: string; // Comma-separated keywords for backend
+  keywords?: string[]; // Array of keywords for frontend state management
   minToughness?: number;
   maxToughness?: number;
   minWounds?: number;
