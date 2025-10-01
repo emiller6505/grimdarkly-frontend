@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="hero">
-        <h1>Welcome to Grimdarkly</h1>
+        <h1>Welcome to Grimdark Grimoire</h1>
         <p className="hero-subtitle">
           Your comprehensive Warhammer 40K database for units, weapons, and factions
         </p>

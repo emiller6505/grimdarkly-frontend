@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { weaponApi } from '../services/api';
 import type { Weapon, WeaponSearchParams } from '../types';
 import WeaponCard from '../components/WeaponCard';
@@ -11,13 +10,11 @@ const Weapons = () => {
   const [weapons, setWeapons] = useState<Weapon[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [searchParams, setSearchParams] = useState<WeaponSearchParams>({});
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (params: WeaponSearchParams) => {
     setLoading(true);
     setError(null);
-    setSearchParams(params);
     
     try {
       const response = await weaponApi.search(params);
@@ -32,7 +29,6 @@ const Weapons = () => {
   };
 
   const handleClearSearch = () => {
-    setSearchParams({});
     setWeapons([]);
     setHasSearched(false);
     setError(null);

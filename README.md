@@ -1,6 +1,6 @@
-# Grimdarkly Frontend
+# Grimdark Grimoire Frontend
 
-A modern React frontend for the Grimdarkly Warhammer 40K database API.
+A modern React frontend for the Grimdark Grimoire Warhammer 40K database API.
 
 ## Features
 
@@ -24,7 +24,7 @@ A modern React frontend for the Grimdarkly Warhammer 40K database API.
 
 - Node.js 18+ 
 - npm or yarn
-- Running Grimdarkly backend API (port 5001)
+- Running Grimdark Grimoire backend API (port 5001)
 
 ### Installation
 

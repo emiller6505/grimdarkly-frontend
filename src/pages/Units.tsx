@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { unitApi } from '../services/api';
 import type { Unit, UnitSearchParams } from '../types';
 import UnitCard from '../components/UnitCard';
@@ -11,13 +10,11 @@ const Units = () => {
   const [units, setUnits] = useState<Unit[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [searchParams, setSearchParams] = useState<UnitSearchParams>({});
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (params: UnitSearchParams) => {
     setLoading(true);
     setError(null);
-    setSearchParams(params);
     
     try {
       const response = await unitApi.search(params);
@@ -32,7 +29,6 @@ const Units = () => {
   };
 
   const handleClearSearch = () => {
-    setSearchParams({});
     setUnits([]);
     setHasSearched(false);
     setError(null);

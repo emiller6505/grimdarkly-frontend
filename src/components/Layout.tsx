@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="container">
           <div className="header-content">
             <Link to="/" className="logo">
-              <h1>Grimdarkly</h1>
+              <h1>Grimdark Grimoire</h1>
               <span className="logo-subtitle">Warhammer 40K Database</span>
             </Link>
             
@@ -62,7 +62,7 @@ const Layout = ({ children }: LayoutProps) => {
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
-            <p>&copy; 2024 Grimdarkly. Warhammer 40K data provided for reference purposes.</p>
+            <p>&copy; 2024 Grimdark Grimoire. Warhammer 40K data provided for reference purposes.</p>
             <p className="text-muted">
               This is an unofficial fan project and is not affiliated with Games Workshop.
             </p>
