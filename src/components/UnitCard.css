@@ -7,6 +7,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden; /* Prevents content from overflowing */
 }
 
 .unit-card:hover {
@@ -21,11 +23,14 @@
   align-items: flex-start;
   margin-bottom: var(--spacing-md);
   gap: var(--spacing-md);
+  position: relative;
+  z-index: 1;
 }
 
 .unit-name {
   margin: 0;
   flex: 1;
+  min-width: 0; /* Prevents flex item from overflowing */
 }
 
 .unit-name a {
@@ -44,23 +49,36 @@
   display: flex;
   gap: var(--spacing-xs);
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .unit-faction {
   margin-bottom: var(--spacing-md);
   padding-bottom: var(--spacing-md);
   border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
-.faction-name {
-  color: var(--text-primary);
-  font-weight: 500;
-  margin-right: var(--spacing-xs);
+/* More specific selector to override any inherited styles */
+.unit-card .unit-faction .faction-name {
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 1rem;
 }
 
-.faction-category {
+/* More specific selector for faction category */
+.unit-card .unit-faction .faction-category {
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+  background-color: var(--bg-tertiary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  display: inline-block;
+  width: fit-content;
 }
 
 .unit-stats {

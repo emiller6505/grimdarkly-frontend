@@ -39,15 +39,14 @@ const UnitCard = ({ unit }: UnitCardProps) => {
       </div>
 
       <div className="unit-faction">
-        <span className="faction-name">{unit.faction.name}</span>
-        <span className="faction-category">({unit.faction.category.name})</span>
+        <span className="faction-name">Faction: {unit.faction.name}</span>
       </div>
 
       <div className="unit-stats">
         <div className="stat-grid">
           <div className="stat-item">
             <span className="stat-label">M</span>
-            <span className="stat-value">{formatStat(unit.movement)}</span>
+            <span className="stat-value">{formatStat(unit.movement)}"</span>
           </div>
           <div className="stat-item">
             <span className="stat-label">T</span>

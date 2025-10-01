@@ -73,10 +73,10 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
 
         <div className="filters-grid">
           <div className="filter-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="unit-name">Unit Name</label>
             <input
               type="text"
-              id="name"
+              id="unit-name"
               placeholder="e.g., Space Marine, Intercessor"
               value={unitFilters.name || ''}
               onChange={(e) => handleInputChange('name', e.target.value)}
