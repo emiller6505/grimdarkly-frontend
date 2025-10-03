@@ -9,6 +9,8 @@ interface UnitCardProps {
 
 const UnitCard = ({ unit }: UnitCardProps) => {
   const [keywordsExpanded, setKeywordsExpanded] = useState(false);
+  const [weaponsExpanded, setWeaponsExpanded] = useState(false);
+  const [configurationsExpanded, setConfigurationsExpanded] = useState(false);
 
   const formatStat = (value: number | string | undefined) => {
     if (value === undefined || value === null) return '-';
@@ -63,14 +65,41 @@ const UnitCard = ({ unit }: UnitCardProps) => {
         <div className="unit-weapons">
           <h4>Weapons ({unit.weapons.length})</h4>
           <div className="weapons-list">
-            {unit.weapons.slice(0, 3).map((weapon) => (
+            {(weaponsExpanded ? unit.weapons : unit.weapons.slice(0, 3)).map((weapon) => (
               <span key={weapon.id} className="weapon-tag">
                 {weapon.name}
               </span>
             ))}
-            {unit.weapons.length > 3 && (
-              <span className="weapon-tag more">
+            {unit.weapons.length > 3 && !weaponsExpanded && (
+              <span 
+                className="weapon-tag more clickable"
+                onClick={() => setWeaponsExpanded(true)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setWeaponsExpanded(true);
+                  }
+                }}
+              >
                 +{unit.weapons.length - 3} more
+              </span>
+            )}
+            {weaponsExpanded && unit.weapons.length > 3 && (
+              <span 
+                className="weapon-tag more clickable"
+                onClick={() => setWeaponsExpanded(false)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setWeaponsExpanded(false);
+                  }
+                }}
+              >
+                Show less
               </span>
             )}
           </div>
@@ -126,15 +155,42 @@ const UnitCard = ({ unit }: UnitCardProps) => {
         <div className="unit-configurations">
           <h4>Configurations</h4>
           <div className="configurations-list">
-            {unit.configurations.slice(0, 2).map((config) => (
+            {(configurationsExpanded ? unit.configurations : unit.configurations.slice(0, 2)).map((config) => (
               <div key={config.id} className="configuration-item">
                 <span className="config-description">{config.description}</span>
                 <span className="config-points">{config.points}pts</span>
               </div>
             ))}
-            {unit.configurations.length > 2 && (
-              <div className="configuration-item more">
+            {unit.configurations.length > 2 && !configurationsExpanded && (
+              <div 
+                className="configuration-item more clickable"
+                onClick={() => setConfigurationsExpanded(true)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setConfigurationsExpanded(true);
+                  }
+                }}
+              >
                 +{unit.configurations.length - 2} more configurations
+              </div>
+            )}
+            {configurationsExpanded && unit.configurations.length > 2 && (
+              <div 
+                className="configuration-item more clickable"
+                onClick={() => setConfigurationsExpanded(false)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setConfigurationsExpanded(false);
+                  }
+                }}
+              >
+                Show less
               </div>
             )}
           </div>

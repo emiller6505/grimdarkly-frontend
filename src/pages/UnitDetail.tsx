@@ -181,6 +181,19 @@ const UnitDetail = () => {
                   <h3 className="weapon-name">
                     <Link to={`/weapons/${weapon.id}`}>{weapon.name}</Link>
                   </h3>
+                  {weapon.abilities && weapon.abilities.length > 0 && (
+                    <div className="weapon-abilities">
+                      <div className="abilities-label">Abilities:</div>
+                      <div className="abilities-list">
+                        {weapon.abilities.map((ability, index) => (
+                          <span key={index} className="ability-tag">
+                            {ability.name}
+                            {ability.value && ` ${ability.value}`}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
