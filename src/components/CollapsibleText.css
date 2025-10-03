@@ -1,0 +1,84 @@
+/* ⚔️ IMPERIAL COLLAPSIBLE TEXT STYLES ⚔️ */
+/* Sacred styles for the collapsible text component */
+
+.collapsible-text-container {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.collapsible-text {
+  margin: 0;
+  line-height: 1.6;
+  color: #e0e0e0;
+  font-size: 14px;
+}
+
+.text-ellipsis {
+  color: #999;
+  font-style: italic;
+  margin-right: 4px;
+}
+
+.read-more-btn,
+.read-less-btn {
+  background: none;
+  border: none;
+  color: #4dabf7;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 2px 6px;
+  margin-left: 6px;
+  text-decoration: underline;
+  transition: all 0.2s ease;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.read-more-btn:hover,
+.read-less-btn:hover {
+  color: #74c0fc;
+  text-decoration: none;
+  background-color: rgba(77, 171, 247, 0.1);
+}
+
+.read-more-btn:focus,
+.read-less-btn:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .collapsible-text {
+    color: #e0e0e0;
+  }
+  
+  .text-ellipsis {
+    color: #999;
+  }
+  
+  .read-more-btn,
+  .read-less-btn {
+    color: #4dabf7;
+  }
+  
+  .read-more-btn:hover,
+  .read-less-btn:hover {
+    color: #74c0fc;
+  }
+  
+  .read-more-btn:focus,
+  .read-less-btn:focus {
+    outline-color: #4dabf7;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .read-more-btn,
+  .read-less-btn {
+    font-size: 0.9em;
+  }
+}

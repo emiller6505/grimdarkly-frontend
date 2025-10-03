@@ -29,6 +29,11 @@ const UnitCard = ({ unit }: UnitCardProps) => {
               {unit.unitType.replace('_', ' ')}
             </span>
           )}
+          {unit.isLegends && (
+            <span className="badge legends-badge">
+              LEGENDS
+            </span>
+          )}
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { unitApi } from '../services/api';
 import type { Unit } from '../types';
 import LoadingSpinner from '../components/LoadingSpinner';
+import CollapsibleText from '../components/CollapsibleText';
 import './UnitDetail.css';
 
 const UnitDetail = () => {
@@ -210,7 +211,11 @@ const UnitDetail = () => {
               {unit.unitAbilities.map((ability) => (
                 <div key={ability.id} className="ability-card">
                   <h3 className="ability-name">{ability.name}</h3>
-                  <p className="ability-description">{ability.description}</p>
+                  <CollapsibleText 
+                    text={ability.description} 
+                    maxLength={120}
+                    className="ability-description"
+                  />
                 </div>
               ))}
             </div>
@@ -301,7 +306,6 @@ const UnitDetail = () => {
               {unit.options.map((option) => (
                 <div key={option.id} className="option-card">
                   <div className="option-header">
-                    <span className="option-button">{option.button}</span>
                     <span className="option-line">Line {option.line}</span>
                   </div>
                   <p className="option-description">{option.description}</p>

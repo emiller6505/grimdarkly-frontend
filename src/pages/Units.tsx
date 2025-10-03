@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { unitApi } from '../services/api';
 import type { Unit, UnitSearchParams } from '../types';
 import UnitCard from '../components/UnitCard';
@@ -7,12 +7,19 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import SortComponent, { type SortState, type SortOption } from '../components/SortComponent';
 import './Units.css';
 
+const LEGENDS_PREFERENCE_KEY = 'grimdarkly-show-legends';
+
 const Units = () => {
   const [units, setUnits] = useState<Unit[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [sortState, setSortState] = useState<SortState>({ criteria: 'name', direction: 'asc' });
+  const [showLegends, setShowLegends] = useState(() => {
+    // Load preference from localStorage, default to true if not set
+    const saved = localStorage.getItem(LEGENDS_PREFERENCE_KEY);
+    return saved !== null ? JSON.parse(saved) : true;
+  });
 
   const sortOptions: SortOption[] = [
     { value: 'name', label: 'Name (default)' },
@@ -23,6 +30,11 @@ const Units = () => {
     { value: 'leadership', label: 'Leadership' },
     { value: 'oc', label: 'Objective Control' }
   ];
+
+  // Save showLegends preference to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(LEGENDS_PREFERENCE_KEY, JSON.stringify(showLegends));
+  }, [showLegends]);
 
   const handleSearch = async (params: UnitSearchParams) => {
     setLoading(true);
@@ -53,7 +65,10 @@ const Units = () => {
   const sortedUnits = useMemo(() => {
     if (!units.length) return units;
 
-    return [...units].sort((a, b) => {
+    // Filter out Legends units if showLegends is false
+    const filteredUnits = showLegends ? units : units.filter(unit => !unit.isLegends);
+
+    return [...filteredUnits].sort((a, b) => {
       let aValue: any;
       let bValue: any;
 
@@ -94,7 +109,7 @@ const Units = () => {
       if (aValue > bValue) return sortState.direction === 'asc' ? 1 : -1;
       return 0;
     });
-  }, [units, sortState]);
+  }, [units, sortState, showLegends]);
 
   return (
     <div className="units-page">
@@ -139,14 +154,32 @@ const Units = () => {
             <div className="results-title">
               <h2>Search Results</h2>
               <p className="results-count">
-                Found {units.length} unit{units.length !== 1 ? 's' : ''}
+                Found {sortedUnits.length} unit{sortedUnits.length !== 1 ? 's' : ''}
+                {!showLegends && units.length > sortedUnits.length && (
+                  <span className="filtered-count">
+                    {' '}({units.length - sortedUnits.length} Legends hidden)
+                  </span>
+                )}
               </p>
             </div>
-            <SortComponent
-              sortOptions={sortOptions}
-              onSortChange={handleSortChange}
-              currentSort={sortState}
-            />
+            <div className="results-controls">
+              <div className="legends-toggle">
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={showLegends}
+                    onChange={(e) => setShowLegends(e.target.checked)}
+                    className="checkbox-input"
+                  />
+                  <span className="checkbox-text">Show Legends?</span>
+                </label>
+              </div>
+              <SortComponent
+                sortOptions={sortOptions}
+                onSortChange={handleSortChange}
+                currentSort={sortState}
+              />
+            </div>
           </div>
           
           <div className="units-grid">

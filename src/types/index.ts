@@ -86,7 +86,6 @@ export interface UnitOption {
   id: number;
   unitId: number;
   line: number;
-  button: string;
   description: string;
 }
 
@@ -120,6 +119,7 @@ export interface Unit {
   compositions: UnitComposition[];
   canLead: LeaderRelationship[];
   ledBy: LeaderRelationship[];
+  isLegends: boolean;
 }
 
 // API Response types
