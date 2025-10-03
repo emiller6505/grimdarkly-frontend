@@ -18,6 +18,13 @@ export interface UnitAbility {
   unitId: number;
 }
 
+export interface Keyword {
+  name: string;
+  isSubFaction: boolean;
+  factionType?: string;
+  parentFaction?: string;
+}
+
 export interface WeaponAbility {
   id: number;
   name: string;
@@ -107,7 +114,7 @@ export interface Unit {
   faction: Faction;
   weapons: Weapon[];
   unitAbilities: UnitAbility[];
-  keywords: string[];
+  keywords: Keyword[];
   configurations: UnitConfiguration[];
   options: UnitOption[];
   compositions: UnitComposition[];

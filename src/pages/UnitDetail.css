@@ -67,25 +67,25 @@
   border-top: 1px solid var(--border-color);
 }
 
-.faction-details {
+.unit-faction-breadcrumb {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 0;
 }
 
-.faction-details .faction-name {
-  color: var(--text-primary);
+.unit-faction-breadcrumb .unit-faction-category,
+.unit-faction-breadcrumb .unit-faction-name,
+.unit-faction-breadcrumb .unit-faction-subfaction {
+  color: var(--text-secondary);
+  font-size: 1rem;
   font-weight: 500;
-  font-size: 1.125rem;
 }
 
-.faction-details .faction-category {
+.unit-faction-breadcrumb .unit-faction-arrow {
   color: var(--text-muted);
-  font-size: 0.875rem;
-  background-color: var(--bg-tertiary);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  margin: 0 var(--spacing-xs);
+  font-weight: 400;
 }
 
 /* Content Sections */
@@ -234,14 +234,6 @@
   color: var(--accent-gold);
 }
 
-.weapon-abilities-cell .ability-tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 2px 6px;
-  line-height: 1.2;
-  white-space: nowrap;
-  margin-right: 2px;
-}
 
 /* Weapon Abilities */
 .weapon-abilities {
@@ -571,11 +563,6 @@
     font-size: 0.625rem;
   }
   
-  .weapon-abilities-cell .ability-tag {
-    font-size: 0.625rem;
-    padding: 1px 4px;
-    line-height: 1.1;
-  }
   
   .ability-tag {
     font-size: 0.625rem;

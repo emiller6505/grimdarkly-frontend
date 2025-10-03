@@ -160,7 +160,7 @@ const WeaponDetail = () => {
               {weapon.abilities.map((abilityValue, index) => (
                 <div key={index} className="weapon-ability-card">
                   <div className="weapon-ability-header">
-                    <h3 className="weapon-ability-name">{abilityValue.ability.name}</h3>
+                    <h3 className="weapon-ability-name">{abilityValue.name}</h3>
                     {abilityValue.value && (
                       <span className="weapon-ability-value">({abilityValue.value})</span>
                     )}

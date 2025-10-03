@@ -77,7 +77,7 @@ const WeaponCard = ({ weapon }: WeaponCardProps) => {
           <div className="abilities-list">
             {weapon.abilities.slice(0, 3).map((abilityValue, index) => (
               <div key={index} className="ability-item">
-                <span className="ability-name">{abilityValue.ability.name}</span>
+                <span className="ability-name">{abilityValue.name}</span>
                 {abilityValue.value && (
                   <span className="ability-value">({abilityValue.value})</span>
                 )}

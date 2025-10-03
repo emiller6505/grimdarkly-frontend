@@ -89,9 +89,21 @@ const UnitDetail = () => {
         </div>
 
         <div className="unit-faction-info">
-          <div className="faction-details">
-            <span className="faction-name">{unit.faction.name}</span>
-            <span className="faction-category">({unit.faction.category.name})</span>
+          <div className="unit-faction-breadcrumb">
+            <span className="unit-faction-category">{unit.faction.category.name}</span>
+            <span className="unit-faction-arrow"> › </span>
+            <span className="unit-faction-name">{unit.faction.name}</span>
+            {(() => {
+              // Find sub-faction keyword using metadata
+              const subFaction = unit.keywords.find(keyword => keyword.isSubFaction);
+              
+              return subFaction ? (
+                <>
+                  <span className="unit-faction-arrow"> › </span>
+                  <span className="unit-faction-subfaction">{subFaction.name}</span>
+                </>
+              ) : null;
+            })()}
           </div>
         </div>
       </div>
@@ -221,14 +233,9 @@ const UnitDetail = () => {
                       </td>
                       <td className="weapon-abilities-cell">
                         {weapon.abilities && weapon.abilities.length > 0 ? (
-                          <>
-                            {weapon.abilities.map((ability, index) => (
-                              <span key={index} className="ability-tag">
-                                {ability.name}
-                                {ability.value && ` ${ability.value}`}
-                              </span>
-                            ))}
-                          </>
+                          weapon.abilities.map(ability => 
+                            `${ability.name}${ability.value ? ` ${ability.value}` : ''}`
+                          ).join(', ')
                         ) : (
                           '-'
                         )}
@@ -261,7 +268,7 @@ const UnitDetail = () => {
             <div className="keywords-grid">
               {unit.keywords.map((keyword, index) => (
                 <span key={index} className="keyword-badge">
-                  {keyword}
+                  {keyword.name}
                 </span>
               ))}
             </div>

@@ -112,7 +112,7 @@ const UnitCard = ({ unit }: UnitCardProps) => {
           <div className="keywords-list">
             {(keywordsExpanded ? unit.keywords : unit.keywords.slice(0, 4)).map((keyword, index) => (
               <span key={index} className="keyword-tag">
-                {keyword}
+                {keyword.name}
               </span>
             ))}
             {unit.keywords.length > 4 && !keywordsExpanded && (
