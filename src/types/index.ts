@@ -50,6 +50,13 @@ export interface UnitReference {
   faction: string;
 }
 
+export interface LeaderRelationship {
+  id: number;
+  name: string;
+  unitType: 'CHARACTER' | 'BATTLELINE' | 'OTHER';
+  faction: string;
+}
+
 export interface WeaponReference {
   id: number;
   name: string;
@@ -99,6 +106,8 @@ export interface Unit {
   configurations: UnitConfiguration[];
   options: UnitOption[];
   compositions: UnitComposition[];
+  canLead: LeaderRelationship[];
+  ledBy: LeaderRelationship[];
 }
 
 // API Response types

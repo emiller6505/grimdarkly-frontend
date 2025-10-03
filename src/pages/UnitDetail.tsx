@@ -127,6 +127,51 @@ const UnitDetail = () => {
           </div>
         </div>
 
+        {/* Leader Relationships Section */}
+        {(unit.canLead.length > 0 || unit.ledBy.length > 0) && (
+          <div className="unit-leadership-section">
+            <h2>Leadership</h2>
+            
+            {unit.canLead.length > 0 && (
+              <div className="leadership-subsection">
+                <h3>This unit can lead:</h3>
+                <div className="leadership-list">
+                  {unit.canLead.map((ledUnit) => (
+                    <div key={ledUnit.id} className="leadership-card">
+                      <Link to={`/units/${ledUnit.id}`} className="leadership-link">
+                        <div className="leadership-name">{ledUnit.name}</div>
+                        <div className="leadership-details">
+                          <span className="leadership-type">{ledUnit.unitType.replace('_', ' ')}</span>
+                          <span className="leadership-faction">{ledUnit.faction}</span>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {unit.ledBy.length > 0 && (
+              <div className="leadership-subsection">
+                <h3>This unit can be led by:</h3>
+                <div className="leadership-list">
+                  {unit.ledBy.map((leaderUnit) => (
+                    <div key={leaderUnit.id} className="leadership-card">
+                      <Link to={`/units/${leaderUnit.id}`} className="leadership-link">
+                        <div className="leadership-name">{leaderUnit.name}</div>
+                        <div className="leadership-details">
+                          <span className="leadership-type">{leaderUnit.unitType.replace('_', ' ')}</span>
+                          <span className="leadership-faction">{leaderUnit.faction}</span>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
         {unit.weapons.length > 0 && (
           <div className="unit-weapons-section">
             <h2>Weapons ({unit.weapons.length})</h2>
