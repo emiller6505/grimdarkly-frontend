@@ -14,7 +14,7 @@ const UnitDetail = () => {
   useEffect(() => {
     const fetchUnit = async () => {
       if (!id) return;
-      
+
       try {
         setLoading(true);
         const response = await unitApi.getById(parseInt(id));
@@ -76,7 +76,7 @@ const UnitDetail = () => {
           <span className="breadcrumb-separator">›</span>
           <span className="breadcrumb-current">{unit.name}</span>
         </div>
-        
+
         <div className="unit-title-section">
           <h1 className="unit-title">{unit.name}</h1>
           <div className="unit-badges">
@@ -96,7 +96,7 @@ const UnitDetail = () => {
             {(() => {
               // Find sub-faction keyword using metadata
               const subFaction = unit.keywords.find(keyword => keyword.isSubFaction);
-              
+
               return subFaction ? (
                 <>
                   <span className="unit-faction-arrow"> › </span>
@@ -138,51 +138,6 @@ const UnitDetail = () => {
             </div>
           </div>
         </div>
-
-        {/* Leader Relationships Section */}
-        {(unit.canLead.length > 0 || unit.ledBy.length > 0) && (
-          <div className="unit-leadership-section">
-            <h2>Leadership</h2>
-            
-            {unit.canLead.length > 0 && (
-              <div className="leadership-subsection">
-                <h3>This unit can lead:</h3>
-                <div className="leadership-list">
-                  {unit.canLead.map((ledUnit) => (
-                    <div key={ledUnit.id} className="leadership-card">
-                      <Link to={`/units/${ledUnit.id}`} className="leadership-link">
-                        <div className="leadership-name">{ledUnit.name}</div>
-                        <div className="leadership-details">
-                          <span className="leadership-type">{ledUnit.unitType.replace('_', ' ')}</span>
-                          <span className="leadership-faction">{ledUnit.faction}</span>
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {unit.ledBy.length > 0 && (
-              <div className="leadership-subsection">
-                <h3>This unit can be led by:</h3>
-                <div className="leadership-list">
-                  {unit.ledBy.map((leaderUnit) => (
-                    <div key={leaderUnit.id} className="leadership-card">
-                      <Link to={`/units/${leaderUnit.id}`} className="leadership-link">
-                        <div className="leadership-name">{leaderUnit.name}</div>
-                        <div className="leadership-details">
-                          <span className="leadership-type">{leaderUnit.unitType.replace('_', ' ')}</span>
-                          <span className="leadership-faction">{leaderUnit.faction}</span>
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
 
         {unit.weapons.length > 0 && (
           <div className="unit-weapons-section">
@@ -233,7 +188,7 @@ const UnitDetail = () => {
                       </td>
                       <td className="weapon-abilities-cell">
                         {weapon.abilities && weapon.abilities.length > 0 ? (
-                          weapon.abilities.map(ability => 
+                          weapon.abilities.map(ability =>
                             `${ability.name}${ability.value ? ` ${ability.value}` : ''}`
                           ).join(', ')
                         ) : (
@@ -272,6 +227,51 @@ const UnitDetail = () => {
                 </span>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Leader Relationships Section */}
+        {(unit.canLead.length > 0 || unit.ledBy.length > 0) && (
+          <div className="unit-leadership-section">
+            <h2>Leadership</h2>
+
+            {unit.canLead.length > 0 && (
+              <div className="leadership-subsection">
+                <h3>This unit can lead:</h3>
+                <div className="leadership-list">
+                  {unit.canLead.map((ledUnit) => (
+                    <div key={ledUnit.id} className="leadership-card">
+                      <Link to={`/units/${ledUnit.id}`} className="leadership-link">
+                        <div className="leadership-name">{ledUnit.name}</div>
+                        <div className="leadership-details">
+                          <span className="leadership-type">{ledUnit.unitType.replace('_', ' ')}</span>
+                          <span className="leadership-faction">{ledUnit.faction}</span>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {unit.ledBy.length > 0 && (
+              <div className="leadership-subsection">
+                <h3>This unit can be led by:</h3>
+                <div className="leadership-list">
+                  {unit.ledBy.map((leaderUnit) => (
+                    <div key={leaderUnit.id} className="leadership-card">
+                      <Link to={`/units/${leaderUnit.id}`} className="leadership-link">
+                        <div className="leadership-name">{leaderUnit.name}</div>
+                        <div className="leadership-details">
+                          <span className="leadership-type">{leaderUnit.unitType.replace('_', ' ')}</span>
+                          <span className="leadership-faction">{leaderUnit.faction}</span>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
