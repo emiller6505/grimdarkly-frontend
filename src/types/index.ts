@@ -30,6 +30,11 @@ export interface WeaponAbilityValue {
   ability: WeaponAbility;
 }
 
+export interface TransformedWeaponAbility {
+  name: string;
+  value?: string;
+}
+
 export interface Weapon {
   id: number;
   name: string;
@@ -40,7 +45,7 @@ export interface Weapon {
   strength: string;
   ap: number;
   damage: string;
-  abilities: WeaponAbilityValue[];
+  abilities: TransformedWeaponAbility[];
   units: UnitReference[];
 }
 
@@ -100,7 +105,7 @@ export interface Unit {
   oc: number;
   unitType: 'CHARACTER' | 'BATTLELINE' | 'OTHER';
   faction: Faction;
-  weapons: WeaponReference[];
+  weapons: Weapon[];
   unitAbilities: UnitAbility[];
   keywords: string[];
   configurations: UnitConfiguration[];

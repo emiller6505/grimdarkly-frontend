@@ -175,27 +175,68 @@ const UnitDetail = () => {
         {unit.weapons.length > 0 && (
           <div className="unit-weapons-section">
             <h2>Weapons ({unit.weapons.length})</h2>
-            <div className="weapons-grid">
-              {unit.weapons.map((weapon) => (
-                <div key={weapon.id} className="weapon-card">
-                  <h3 className="weapon-name">
-                    <Link to={`/weapons/${weapon.id}`}>{weapon.name}</Link>
-                  </h3>
-                  {weapon.abilities && weapon.abilities.length > 0 && (
-                    <div className="weapon-abilities">
-                      <div className="abilities-label">Abilities:</div>
-                      <div className="abilities-list">
-                        {weapon.abilities.map((ability, index) => (
-                          <span key={index} className="ability-tag">
-                            {ability.name}
-                            {ability.value && ` ${ability.value}`}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+            <div className="weapons-table-container">
+              <table className="weapons-table">
+                <thead>
+                  <tr>
+                    <th>Weapon</th>
+                    <th>Type</th>
+                    <th>Range</th>
+                    <th>Attacks</th>
+                    <th>Skill</th>
+                    <th>Strength</th>
+                    <th>AP</th>
+                    <th>Damage</th>
+                    <th>Abilities</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {unit.weapons.map((weapon) => (
+                    <tr key={weapon.id} className="weapon-row">
+                      <td className="weapon-name-cell">
+                        <Link to={`/weapons/${weapon.id}`} className="weapon-name-link">
+                          {weapon.name}
+                        </Link>
+                      </td>
+                      <td className="weapon-type-cell">
+                        {weapon.weaponType}
+                      </td>
+                      <td className="weapon-range-cell">
+                        {weapon.range ? `${weapon.range}"` : '-'}
+                      </td>
+                      <td className="weapon-attacks-cell">
+                        {weapon.attacks}
+                      </td>
+                      <td className="weapon-skill-cell">
+                        {weapon.skill ? `${weapon.skill}+` : '-'}
+                      </td>
+                      <td className="weapon-strength-cell">
+                        {weapon.strength}
+                      </td>
+                      <td className="weapon-ap-cell">
+                        {weapon.ap > 0 ? `-${weapon.ap}` : weapon.ap}
+                      </td>
+                      <td className="weapon-damage-cell">
+                        {weapon.damage}
+                      </td>
+                      <td className="weapon-abilities-cell">
+                        {weapon.abilities && weapon.abilities.length > 0 ? (
+                          <>
+                            {weapon.abilities.map((ability, index) => (
+                              <span key={index} className="ability-tag">
+                                {ability.name}
+                                {ability.value && ` ${ability.value}`}
+                              </span>
+                            ))}
+                          </>
+                        ) : (
+                          '-'
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}

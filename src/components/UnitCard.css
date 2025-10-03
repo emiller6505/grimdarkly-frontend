@@ -270,9 +270,13 @@
     padding: var(--spacing-xs) 2px;
   }
   
-  .weapons-list,
-  .keywords-list {
+  .weapons-list {
     flex-direction: column;
+  }
+  
+  .keywords-list {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   
   .weapon-tag,

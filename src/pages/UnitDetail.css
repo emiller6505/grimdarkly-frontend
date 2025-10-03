@@ -154,34 +154,93 @@
   padding: var(--spacing-xl);
 }
 
-.weapons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--spacing-lg);
-}
-
-.weapon-card {
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
+/* Weapons Table */
+.weapons-table-container {
+  overflow-x: auto;
   border-radius: var(--radius-md);
-  padding: var(--spacing-lg);
-  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
 }
 
-.weapon-card:hover {
-  border-color: var(--accent-blue);
-  transform: translateY(-2px);
+.weapons-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-tertiary);
+  font-size: 0.875rem;
+  table-layout: auto;
 }
 
-.weapon-name a {
+.weapons-table thead {
+  background-color: var(--bg-primary);
+  border-bottom: 2px solid var(--accent-gold);
+}
+
+.weapons-table th {
+  padding: var(--spacing-md) var(--spacing-sm);
+  text-align: left;
+  font-weight: 600;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  border-right: 1px solid var(--border-color);
+}
+
+.weapons-table th:last-child {
+  border-right: none;
+}
+
+.weapons-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.weapons-table tbody tr:hover {
+  background-color: var(--bg-secondary);
+}
+
+.weapons-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.weapons-table td {
+  padding: var(--spacing-md) var(--spacing-sm);
+  border-right: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+.weapon-abilities-cell {
+  width: auto;
+  max-width: 200px;
+}
+
+.weapons-table th:nth-child(9),
+.weapons-table td:nth-child(9) {
+  width: auto;
+  max-width: 200px;
+}
+
+.weapons-table td:last-child {
+  border-right: none;
+}
+
+.weapon-name-link {
   color: var(--accent-blue);
   text-decoration: none;
-  font-size: 1.125rem;
   font-weight: 600;
+  transition: color 0.2s ease;
 }
 
-.weapon-name a:hover {
+.weapon-name-link:hover {
   color: var(--accent-gold);
+}
+
+.weapon-abilities-cell .ability-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+  margin-right: 2px;
 }
 
 /* Weapon Abilities */
@@ -499,8 +558,28 @@
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .weapons-grid {
-    grid-template-columns: 1fr;
+  .weapons-table-container {
+    font-size: 0.75rem;
+  }
+  
+  .weapons-table th,
+  .weapons-table td {
+    padding: var(--spacing-sm) var(--spacing-xs);
+  }
+  
+  .weapons-table th {
+    font-size: 0.625rem;
+  }
+  
+  .weapon-abilities-cell .ability-tag {
+    font-size: 0.625rem;
+    padding: 1px 4px;
+    line-height: 1.1;
+  }
+  
+  .ability-tag {
+    font-size: 0.625rem;
+    padding: 1px 6px;
   }
   
   .unit-detail-footer {
