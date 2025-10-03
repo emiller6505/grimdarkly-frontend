@@ -164,6 +164,7 @@ export interface UnitSearchParams {
 export interface WeaponSearchParams {
   name?: string;
   weaponType?: 'MELEE' | 'RANGED';
+  keyword?: string; // Comma-separated keywords for backend
   minRange?: number;
   maxRange?: number;
   ap?: number;

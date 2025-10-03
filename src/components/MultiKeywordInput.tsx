@@ -14,12 +14,50 @@ const MultiKeywordInput: React.FC<MultiKeywordInputProps> = ({
   placeholder = "Enter keywords separated by commas..."
 }) => {
   const [inputValue, setInputValue] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  const validateKeyword = (keyword: string): string | null => {
+    const trimmed = keyword.trim();
+    
+    if (!trimmed) {
+      return 'Keyword cannot be empty';
+    }
+    
+    if (trimmed.length < 2) {
+      return 'Keyword must be at least 2 characters long';
+    }
+    
+    if (trimmed.length > 50) {
+      return 'Keyword cannot exceed 50 characters';
+    }
+    
+    if (appliedKeywords.includes(trimmed)) {
+      return 'Keyword already added';
+    }
+    
+    if (appliedKeywords.length >= 10) {
+      return 'Maximum 10 keywords allowed';
+    }
+    
+    // Check for potentially problematic characters
+    if (/[<>{}[\]\\|`~!@#$%^&*()+=\/]/.test(trimmed)) {
+      return 'Keyword contains invalid characters';
+    }
+    
+    return null;
+  };
 
   const addKeyword = (keyword: string) => {
-    const trimmedKeyword = keyword.trim();
-    if (trimmedKeyword && !appliedKeywords.includes(trimmedKeyword)) {
-      onKeywordsChange([...appliedKeywords, trimmedKeyword]);
+    const validationError = validateKeyword(keyword);
+    
+    if (validationError) {
+      setError(validationError);
+      return;
     }
+    
+    setError(null);
+    const trimmedKeyword = keyword.trim();
+    onKeywordsChange([...appliedKeywords, trimmedKeyword]);
   };
 
   const removeKeyword = (keywordToRemove: string) => {
@@ -29,6 +67,11 @@ const MultiKeywordInput: React.FC<MultiKeywordInputProps> = ({
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
+    
+    // Clear error when user starts typing
+    if (error) {
+      setError(null);
+    }
 
     // Check if user typed a comma
     if (value.includes(',')) {
@@ -66,8 +109,13 @@ const MultiKeywordInput: React.FC<MultiKeywordInputProps> = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         placeholder={appliedKeywords.length === 0 ? placeholder : "Add more keywords..."}
-        className="keyword-input-field"
+        className={`keyword-input-field ${error ? 'error' : ''}`}
       />
+      {error && (
+        <div className="keyword-error">
+          {error}
+        </div>
+      )}
       <div className="applied-keywords">
         {appliedKeywords.map((keyword) => (
           <KeywordTag

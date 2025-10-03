@@ -17,17 +17,26 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string | number | undefined) => {
+    // Handle empty strings and null values as undefined, but preserve 0 and false
+    const processedValue = value === '' || value === null ? undefined : value;
+    
     if (type === 'units') {
       setUnitFilters(prev => ({
         ...prev,
-        [field]: value || undefined
+        [field]: processedValue
       }));
     } else {
       setWeaponFilters(prev => ({
         ...prev,
-        [field]: value || undefined
+        [field]: processedValue
       }));
     }
+  };
+
+  const handleNumberInputChange = (field: string, value: string) => {
+    // For number inputs, convert empty string to undefined, but preserve 0
+    const numValue = value === '' ? undefined : parseInt(value, 10);
+    handleInputChange(field, numValue);
   };
 
   const handleKeywordsChange = (keywords: string[]) => {
@@ -35,7 +44,11 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
     if (type === 'units') {
       setUnitFilters(prev => ({
         ...prev,
-        keywords: keywords,
+        keyword: keywords.length > 0 ? keywords.join(',') : undefined
+      }));
+    } else if (type === 'weapons') {
+      setWeaponFilters(prev => ({
+        ...prev,
         keyword: keywords.length > 0 ? keywords.join(',') : undefined
       }));
     }
@@ -61,30 +74,34 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
     e.preventDefault();
   };
 
-  const executeSearch = () => {
+  const executeSearch = async () => {
     if (isSubmitting || loading) return;
     
     setIsSubmitting(true);
-    if (type === 'units') {
-      onSearch(unitFilters);
-    } else {
-      onSearch(weaponFilters);
+    try {
+      if (type === 'units') {
+        await onSearch(unitFilters);
+      } else {
+        await onSearch(weaponFilters);
+      }
+    } catch (error) {
+      // Error handling is done in the parent component
+      console.error('Search execution error:', error);
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    // Reset the flag after a short delay
-    setTimeout(() => setIsSubmitting(false), 100);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    executeSearch();
+    await executeSearch();
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = async (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && hasActiveFilters && !loading && !isSubmitting) {
       e.preventDefault();
       e.stopPropagation();
-      executeSearch();
+      await executeSearch();
     }
   };
 
@@ -97,7 +114,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
 
   const currentFilters = type === 'units' ? unitFilters : weaponFilters;
   const hasActiveFilters = Object.values(currentFilters).some(value => 
-    value !== undefined && value !== '' && value !== null && value !== 0
+    value !== undefined && value !== '' && value !== null
   ) || appliedKeywords.length > 0;
 
   if (type === 'units') {
@@ -130,7 +147,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             <input
               type="text"
               id="unit-name"
-              placeholder="e.g. Space Marine, Intercessor"
+              placeholder="e.g. Captain, Plague Marines"
               value={unitFilters.name || ''}
               onChange={(e) => handleInputChange('name', e.target.value)}
             />
@@ -177,8 +194,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               id="minToughness"
               min="1"
               max="10"
-              value={unitFilters.minToughness || ''}
-              onChange={(e) => handleInputChange('minToughness', e.target.value ? parseInt(e.target.value) : undefined)}
+              value={unitFilters.minToughness ?? ''}
+              onChange={(e) => handleNumberInputChange('minToughness', e.target.value)}
               onKeyDown={handleNumberKeyDown}
             />
           </div>
@@ -190,8 +207,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               id="maxToughness"
               min="1"
               max="10"
-              value={unitFilters.maxToughness || ''}
-              onChange={(e) => handleInputChange('maxToughness', e.target.value ? parseInt(e.target.value) : undefined)}
+              value={unitFilters.maxToughness ?? ''}
+              onChange={(e) => handleNumberInputChange('maxToughness', e.target.value)}
               onKeyDown={handleNumberKeyDown}
             />
           </div>
@@ -202,8 +219,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               type="number"
               id="minWounds"
               min="1"
-              value={unitFilters.minWounds || ''}
-              onChange={(e) => handleInputChange('minWounds', e.target.value ? parseInt(e.target.value) : undefined)}
+              value={unitFilters.minWounds ?? ''}
+              onChange={(e) => handleNumberInputChange('minWounds', e.target.value)}
               onKeyDown={handleNumberKeyDown}
             />
           </div>
@@ -214,8 +231,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               type="number"
               id="maxWounds"
               min="1"
-              value={unitFilters.maxWounds || ''}
-              onChange={(e) => handleInputChange('maxWounds', e.target.value ? parseInt(e.target.value) : undefined)}
+              value={unitFilters.maxWounds ?? ''}
+              onChange={(e) => handleNumberInputChange('maxWounds', e.target.value)}
               onKeyDown={handleNumberKeyDown}
             />
           </div>
@@ -227,8 +244,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               id="minMovement"
               min="0"
               max="20"
-              value={unitFilters.minMovement || ''}
-              onChange={(e) => handleInputChange('minMovement', e.target.value ? parseInt(e.target.value) : undefined)}
+              value={unitFilters.minMovement ?? ''}
+              onChange={(e) => handleNumberInputChange('minMovement', e.target.value)}
               onKeyDown={handleNumberKeyDown}
             />
           </div>
@@ -240,8 +257,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
               id="maxMovement"
               min="0"
               max="20"
-              value={unitFilters.maxMovement || ''}
-              onChange={(e) => handleInputChange('maxMovement', e.target.value ? parseInt(e.target.value) : undefined)}
+              value={unitFilters.maxMovement ?? ''}
+              onChange={(e) => handleNumberInputChange('maxMovement', e.target.value)}
               onKeyDown={handleNumberKeyDown}
             />
           </div>
@@ -259,6 +276,11 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
                 </span>
               );
             })}
+            {appliedKeywords.length > 0 && (
+              <span className="active-filter-tag">
+                keywords: {appliedKeywords.join(', ')}
+              </span>
+            )}
             </div>
           </div>
         )}
@@ -316,13 +338,22 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
         </div>
 
         <div className="filter-group">
+          <label htmlFor="keywords">Keywords</label>
+          <MultiKeywordInput
+            appliedKeywords={appliedKeywords}
+            onKeywordsChange={handleKeywordsChange}
+            placeholder="e.g. Rapid Fire, Assault"
+          />
+        </div>
+
+        <div className="filter-group">
           <label htmlFor="minRange">Min Range</label>
           <input
             type="number"
             id="minRange"
             min="0"
-            value={weaponFilters.minRange || ''}
-            onChange={(e) => handleInputChange('minRange', e.target.value ? parseInt(e.target.value) : undefined)}
+            value={weaponFilters.minRange ?? ''}
+            onChange={(e) => handleNumberInputChange('minRange', e.target.value)}
             onKeyDown={handleNumberKeyDown}
           />
         </div>
@@ -333,8 +364,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             type="number"
             id="maxRange"
             min="0"
-            value={weaponFilters.maxRange || ''}
-            onChange={(e) => handleInputChange('maxRange', e.target.value ? parseInt(e.target.value) : undefined)}
+            value={weaponFilters.maxRange ?? ''}
+            onChange={(e) => handleNumberInputChange('maxRange', e.target.value)}
             onKeyDown={handleNumberKeyDown}
           />
         </div>
@@ -345,8 +376,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
             type="number"
             id="ap"
             placeholder="e.g. -1, -2"
-            value={weaponFilters.ap || ''}
-            onChange={(e) => handleInputChange('ap', e.target.value ? parseInt(e.target.value) : undefined)}
+            value={weaponFilters.ap ?? ''}
+            onChange={(e) => handleNumberInputChange('ap', e.target.value)}
             onKeyDown={handleNumberKeyDown}
           />
         </div>
@@ -375,6 +406,11 @@ const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps)
                 </span>
               );
             })}
+            {appliedKeywords.length > 0 && (
+              <span className="active-filter-tag">
+                keywords: {appliedKeywords.join(', ')}
+              </span>
+            )}
           </div>
         </div>
       )}

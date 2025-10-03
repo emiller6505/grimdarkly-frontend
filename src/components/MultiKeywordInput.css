@@ -33,6 +33,21 @@
   color: var(--text-muted);
 }
 
+.keyword-input-field.error {
+  border-color: var(--error-color, #dc2626);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.keyword-error {
+  color: var(--error-color, #dc2626);
+  font-size: 0.8rem;
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  background-color: rgba(220, 38, 38, 0.05);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--error-color, #dc2626);
+}
+
 /* Mobile responsiveness */
 @media (max-width: 480px) {
   .applied-keywords {
