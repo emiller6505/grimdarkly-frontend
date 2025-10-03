@@ -9,9 +9,20 @@ import type {
   WeaponSearchParams,
 } from '../types';
 
+// Get API base URL from environment or use default
+const getApiBaseUrl = () => {
+  // In development, use relative path for proxy
+  if (import.meta.env.DEV) {
+    return '/api';
+  }
+  
+  // In production, use environment variable or default to Render backend
+  return import.meta.env.VITE_API_URL || 'https://grimdarkly-backend.onrender.com/api';
+};
+
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: getApiBaseUrl(),
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
