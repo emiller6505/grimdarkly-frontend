@@ -1,0 +1,80 @@
+import { Link } from 'react-router-dom';
+import type { Faction } from '../types';
+import './FactionCard.css';
+
+interface FactionCardProps {
+  faction: Faction;
+}
+
+const FactionCard = ({ faction }: FactionCardProps) => {
+  // Generate unique faction descriptions based on lore and characteristics
+  const getFactionDescription = (factionName: string): string => {
+    // Sanitize faction name to replace Unicode smart quotes with regular apostrophes
+    const sanitizedName = factionName.replace(/'/g, "'");
+    
+    // Debug logging
+    console.log('Original faction name:', JSON.stringify(factionName));
+    console.log('Sanitized faction name:', JSON.stringify(sanitizedName));
+    console.log('Looking for key:', JSON.stringify(sanitizedName));
+    
+    const descriptions: Record<string, string> = {
+      'Adepta Sororitas': 'The militant arm of the Ecclesiarchy, wielding faith as their greatest weapon against the enemies of the Emperor.',
+      'Adeptus Custodes': 'The Emperor\'s personal bodyguards, genetically enhanced super-soldiers who are the pinnacle of human perfection.',
+      'Adeptus Mechanicus': 'The tech-priests of Mars, masters of ancient technology and cybernetic augmentation in service to the Omnissiah.',
+      'Adeptus Titanicus': 'Pilots of the mighty God-Machines, commanding colossal war engines that can level entire cities.',
+      'Aeldari': 'The ancient and graceful space elves, masters of psychic powers and advanced technology from a fallen empire.',
+      'Astra Militarum': 'The vast armies of the Imperium, countless billions of brave soldiers holding the line against all threats.',
+      'Chaos Daemons': 'Malevolent entities from the Warp, manifestations of the Dark Gods\' will and pure embodiments of corruption.',
+      'Chaos Knights': 'Noble houses corrupted by Chaos, piloting massive war machines in service to the Ruinous Powers.',
+      'Chaos Space Marines': 'Traitor Astartes who have turned from the Emperor\'s light, embracing the dark gifts of Chaos.',
+      'Death Guard': 'Nurgle\'s chosen warriors, spreading plague and decay while remaining unnaturally resilient to all harm.',
+      'Drukhari': 'The dark kin of the Aeldari, sadistic raiders who feed on the suffering of others to stave off their own damnation.',
+      'Emperor\'s Children': 'Slaanesh\'s perfectionist followers, seeking ever-greater sensations and aesthetic beauty in all things.',
+      'Genestealer Cults': 'Hidden infiltrators working to prepare worlds for the coming of the Great Devourer through subversion and mutation.',
+      'Grey Knights': 'The Emperor\'s daemon-hunting specialists, incorruptible warriors dedicated to purging the galaxy of Chaos.',
+      'Imperial Agents': 'The diverse operatives of the Inquisition and other Imperial organizations, working in the shadows to protect humanity.',
+      'Imperial Knights': 'Noble houses piloting towering war machines, bound by ancient oaths to defend their worlds and the Imperium.',
+      'Leagues of Votann': 'The Kin, ancient space dwarves who mine the galaxy\'s riches while maintaining their independence from the Imperium.',
+      'Necrons': 'Ancient robotic warriors who ruled the galaxy eons ago, now awakening from their tomb worlds to reclaim their empire.',
+      'Orks': 'Brutal and warlike greenskins who live for battle, growing stronger through combat and spreading across the galaxy.',
+      'Space Marines': 'The Emperor\'s finest warriors, genetically enhanced super-soldiers who are humanity\'s greatest defenders.',
+      'Thousand Sons': 'Tzeentch\'s scholarly followers, masters of sorcery and mutation who seek to unlock the universe\'s greatest secrets.',
+      'Tyranids': 'The Great Devourer, an endless swarm of bio-engineered horrors that consumes all life in its path across the galaxy.',
+      'T\'au Empire': 'A young and rapidly expanding empire that seeks to unite all races under the Greater Good through diplomacy and technology.',
+      'Unaligned Forces': 'Independent factions and mercenaries who operate outside the major galactic powers, serving their own interests.',
+      'World Eaters': 'Khorne\'s bloodthirsty berserkers, lost to the rage of the Blood God and seeking only to spill blood in his name.'
+    };
+
+    console.log('Available keys:', Object.keys(descriptions));
+    console.log('Found description:', descriptions[sanitizedName]);
+    
+    return descriptions[sanitizedName] || `Explore units, weapons, and abilities for the ${factionName} faction.`;
+  };
+
+  return (
+    <div className="faction-card">
+      <div className="faction-header">
+        <h3 className="faction-name">{faction.name}</h3>
+      </div>
+
+      <div className="faction-content">
+        <div className="faction-info">
+          <p className="faction-description">
+            {getFactionDescription(faction.name)}
+          </p>
+        </div>
+
+        <div className="faction-actions">
+          <Link 
+            to={`/units?faction=${encodeURIComponent(faction.name)}`}
+            className="btn btn-primary"
+          >
+            View Units
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FactionCard;

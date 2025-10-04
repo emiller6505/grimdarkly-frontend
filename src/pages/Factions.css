@@ -60,23 +60,7 @@
 .factions-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xl);
-}
-
-.faction-category {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-}
-
-.category-title {
-  color: var(--accent-gold);
-  margin-bottom: var(--spacing-lg);
-  font-size: 1.5rem;
-  text-align: center;
-  padding-bottom: var(--spacing-md);
-  border-bottom: 2px solid var(--border-color);
+  gap: var(--spacing-xl);
 }
 
 .factions-grid {
@@ -115,9 +99,5 @@
   
   .factions-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .faction-category {
-    padding: var(--spacing-lg);
   }
 }

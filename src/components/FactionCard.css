@@ -16,79 +16,16 @@
 }
 
 .faction-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: var(--spacing-md);
-  gap: var(--spacing-md);
 }
 
 .faction-name {
   color: var(--accent-gold);
   margin: 0;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.3;
-  flex: 1;
-}
-
-.faction-badges {
-  display: flex;
-  gap: var(--spacing-xs);
-  flex-shrink: 0;
-}
-
-.category-badge {
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.category-imperium {
-  background-color: #1e40af;
-  color: white;
-}
-
-.category-chaos {
-  background-color: #dc2626;
-  color: white;
-}
-
-.category-xenos {
-  background-color: #059669;
-  color: white;
-}
-
-.category-aeldari {
-  background-color: #7c3aed;
-  color: white;
-}
-
-.category-tyranids {
-  background-color: #ea580c;
-  color: white;
-}
-
-.category-necrons {
-  background-color: #374151;
-  color: white;
-}
-
-.category-orks {
-  background-color: #16a34a;
-  color: white;
-}
-
-.category-tau {
-  background-color: #0ea5e9;
-  color: white;
-}
-
-.category-default {
-  background-color: var(--bg-secondary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
+  text-align: center;
 }
 
 .faction-content {
@@ -120,12 +57,7 @@
 
 /* Mobile responsiveness */
 @media (max-width: 480px) {
-  .faction-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .faction-badges {
-    align-self: flex-start;
+  .faction-name {
+    font-size: 1.125rem;
   }
 }

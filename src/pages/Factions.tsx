@@ -44,15 +44,8 @@ const Factions = () => {
     );
   }
 
-  // Group factions by category
-  const factionsByCategory = factions.reduce((acc, faction) => {
-    const category = faction.category.name;
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(faction);
-    return acc;
-  }, {} as Record<string, Faction[]>);
+  // Sort factions alphabetically by name
+  const sortedFactions = [...factions].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="factions-page">
@@ -67,24 +60,15 @@ const Factions = () => {
             <span className="stat-number">{factions.length}</span>
             <span className="stat-label">Total Factions</span>
           </div>
-          <div className="summary-stat">
-            <span className="stat-number">{Object.keys(factionsByCategory).length}</span>
-            <span className="stat-label">Categories</span>
-          </div>
         </div>
       </div>
 
       <div className="factions-content">
-        {Object.entries(factionsByCategory).map(([category, categoryFactions]) => (
-          <div key={category} className="faction-category">
-            <h2 className="category-title">{category}</h2>
-            <div className="factions-grid">
-              {categoryFactions.map((faction) => (
-                <FactionCard key={faction.id} faction={faction} />
-              ))}
-            </div>
-          </div>
-        ))}
+        <div className="factions-grid">
+          {sortedFactions.map((faction) => (
+            <FactionCard key={faction.id} faction={faction} />
+          ))}
+        </div>
       </div>
     </div>
   );

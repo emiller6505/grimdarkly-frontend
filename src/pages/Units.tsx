@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { unitApi } from '../services/api';
 import type { Unit, UnitSearchParams } from '../types';
 import UnitCard from '../components/UnitCard';
@@ -11,6 +12,7 @@ import './Units.css';
 const LEGENDS_PREFERENCE_KEY = 'grimdarkly-show-legends';
 
 const Units = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [units, setUnits] = useState<Unit[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,6 +44,69 @@ const Units = () => {
   useEffect(() => {
     localStorage.setItem(LEGENDS_PREFERENCE_KEY, JSON.stringify(showLegends));
   }, [showLegends]);
+
+  // Handle URL parameters and auto-trigger search
+  useEffect(() => {
+    const faction = searchParams.get('faction');
+    const name = searchParams.get('name');
+    const unitType = searchParams.get('unitType') as 'CHARACTER' | 'BATTLELINE' | 'OTHER' | null;
+    const keyword = searchParams.get('keyword');
+    const minToughness = searchParams.get('minToughness');
+    const maxToughness = searchParams.get('maxToughness');
+    const minWounds = searchParams.get('minWounds');
+    const maxWounds = searchParams.get('maxWounds');
+    const minMovement = searchParams.get('minMovement');
+    const maxMovement = searchParams.get('maxMovement');
+
+    // Build search parameters from URL
+    const urlSearchParams: UnitSearchParams = {};
+    
+    if (faction) urlSearchParams.faction = faction;
+    if (name) urlSearchParams.name = name;
+    if (unitType) urlSearchParams.unitType = unitType;
+    if (keyword) urlSearchParams.keyword = keyword;
+    if (minToughness) urlSearchParams.minToughness = parseInt(minToughness, 10);
+    if (maxToughness) urlSearchParams.maxToughness = parseInt(maxToughness, 10);
+    if (minWounds) urlSearchParams.minWounds = parseInt(minWounds, 10);
+    if (maxWounds) urlSearchParams.maxWounds = parseInt(maxWounds, 10);
+    if (minMovement) urlSearchParams.minMovement = parseInt(minMovement, 10);
+    if (maxMovement) urlSearchParams.maxMovement = parseInt(maxMovement, 10);
+
+    // Auto-trigger search if any parameters are present
+    const hasSearchParams = Object.keys(urlSearchParams).length > 0;
+    if (hasSearchParams) {
+      handleSearch(urlSearchParams);
+    }
+  }, [searchParams]);
+
+  // Build initial values for SearchFilters from URL parameters
+  const getInitialSearchValues = (): UnitSearchParams => {
+    const faction = searchParams.get('faction');
+    const name = searchParams.get('name');
+    const unitType = searchParams.get('unitType') as 'CHARACTER' | 'BATTLELINE' | 'OTHER' | null;
+    const keyword = searchParams.get('keyword');
+    const minToughness = searchParams.get('minToughness');
+    const maxToughness = searchParams.get('maxToughness');
+    const minWounds = searchParams.get('minWounds');
+    const maxWounds = searchParams.get('maxWounds');
+    const minMovement = searchParams.get('minMovement');
+    const maxMovement = searchParams.get('maxMovement');
+
+    const initialValues: UnitSearchParams = {};
+    
+    if (faction) initialValues.faction = faction;
+    if (name) initialValues.name = name;
+    if (unitType) initialValues.unitType = unitType;
+    if (keyword) initialValues.keyword = keyword;
+    if (minToughness) initialValues.minToughness = parseInt(minToughness, 10);
+    if (maxToughness) initialValues.maxToughness = parseInt(maxToughness, 10);
+    if (minWounds) initialValues.minWounds = parseInt(minWounds, 10);
+    if (maxWounds) initialValues.maxWounds = parseInt(maxWounds, 10);
+    if (minMovement) initialValues.minMovement = parseInt(minMovement, 10);
+    if (maxMovement) initialValues.maxMovement = parseInt(maxMovement, 10);
+
+    return initialValues;
+  };
 
   const handleSearch = async (params: UnitSearchParams) => {
     setLoading(true);
@@ -146,6 +211,7 @@ const Units = () => {
           onSearch={handleSearch}
           onClear={handleClearSearch}
           loading={loading}
+          initialValues={getInitialSearchValues()}
         />
       </div>
 

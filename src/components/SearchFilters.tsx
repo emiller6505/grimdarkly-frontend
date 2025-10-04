@@ -8,12 +8,28 @@ interface SearchFiltersProps {
   onSearch: (params: UnitSearchParams | WeaponSearchParams) => void;
   onClear: () => void;
   loading: boolean;
+  initialValues?: UnitSearchParams | WeaponSearchParams;
 }
 
-const SearchFilters = ({ type, onSearch, onClear, loading }: SearchFiltersProps) => {
-  const [unitFilters, setUnitFilters] = useState<UnitSearchParams>({});
-  const [weaponFilters, setWeaponFilters] = useState<WeaponSearchParams>({});
-  const [appliedKeywords, setAppliedKeywords] = useState<string[]>([]);
+const SearchFilters = ({ type, onSearch, onClear, loading, initialValues }: SearchFiltersProps) => {
+  const [unitFilters, setUnitFilters] = useState<UnitSearchParams>(() => {
+    if (type === 'units' && initialValues) {
+      return initialValues as UnitSearchParams;
+    }
+    return {};
+  });
+  const [weaponFilters, setWeaponFilters] = useState<WeaponSearchParams>(() => {
+    if (type === 'weapons' && initialValues) {
+      return initialValues as WeaponSearchParams;
+    }
+    return {};
+  });
+  const [appliedKeywords, setAppliedKeywords] = useState<string[]>(() => {
+    if (initialValues && 'keyword' in initialValues && initialValues.keyword) {
+      return initialValues.keyword.split(',').map(k => k.trim()).filter(k => k.length > 0);
+    }
+    return [];
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string | number | undefined) => {
