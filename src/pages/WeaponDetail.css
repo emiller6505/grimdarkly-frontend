@@ -361,6 +361,15 @@
   
   .weapon-stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .weapon-stat-card {
+    padding: var(--spacing-md);
+  }
+  
+  .weapon-stat-value {
+    font-size: 1.5rem;
   }
   
   .weapon-units-grid {
@@ -380,6 +389,7 @@
   
   .weapon-units-section h2 {
     min-width: auto;
+    font-size: 1.25rem;
   }
   
   .faction-filter {
@@ -393,6 +403,7 @@
   .weapon-detail-footer {
     flex-direction: column;
     align-items: stretch;
+    gap: var(--spacing-md);
   }
   
   .weapon-detail-content {
@@ -410,9 +421,29 @@
   }
 }
 
+@media (max-width: 640px) {
+  .weapon-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+  
+  .weapon-stat-card {
+    padding: var(--spacing-sm);
+  }
+  
+  .weapon-stat-value {
+    font-size: 1.25rem;
+  }
+  
+  .weapon-stat-label {
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 480px) {
   .weapon-stats-grid {
     grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
   }
   
   .weapon-title {
@@ -421,5 +452,26 @@
   
   .breadcrumb {
     flex-wrap: wrap;
+  }
+  
+  .weapon-stat-card {
+    padding: var(--spacing-sm);
+  }
+  
+  .weapon-stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .weapon-stat-label {
+    font-size: 0.75rem;
+  }
+  
+  .weapon-units-section h2 {
+    font-size: 1.125rem;
+  }
+  
+  .faction-filter-select {
+    min-width: 180px;
+    font-size: 0.8rem;
   }
 }

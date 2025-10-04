@@ -5,6 +5,7 @@ import UnitCard from '../components/UnitCard';
 import SearchFilters from '../components/SearchFilters';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SortComponent, { type SortState, type SortOption } from '../components/SortComponent';
+import EasterEggModal from '../components/EasterEggModal';
 import './Units.css';
 
 const LEGENDS_PREFERENCE_KEY = 'grimdarkly-show-legends';
@@ -20,6 +21,12 @@ const Units = () => {
     const saved = localStorage.getItem(LEGENDS_PREFERENCE_KEY);
     return saved !== null ? JSON.parse(saved) : true;
   });
+  
+  // Easter egg modal state
+  const [easterEggModal, setEasterEggModal] = useState<{
+    isOpen: boolean;
+    searchTerm: string;
+  }>({ isOpen: false, searchTerm: '' });
 
   const sortOptions: SortOption[] = [
     { value: 'name', label: 'Name (default)' },
@@ -40,6 +47,17 @@ const Units = () => {
     setLoading(true);
     setError(null);
     
+    // Check for easter egg names in the search
+    const searchName = params.name?.toLowerCase() || '';
+    if (searchName.includes('bruce dickinson') || searchName.includes('will ferrell') || searchName.includes('christopher walken') || searchName.includes('cowbell') || searchName.includes('more cowbell')) {
+      setEasterEggModal({
+        isOpen: true,
+        searchTerm: params.name || ''
+      });
+      setLoading(false);
+      return;
+    }
+    
     try {
       const response = await unitApi.search(params);
       setUnits(response.data);
@@ -56,6 +74,10 @@ const Units = () => {
     setUnits([]);
     setHasSearched(false);
     setError(null);
+  };
+
+  const handleCloseEasterEggModal = () => {
+    setEasterEggModal({ isOpen: false, searchTerm: '' });
   };
 
   const handleSortChange = (newSortState: SortState) => {
@@ -206,6 +228,13 @@ const Units = () => {
           </div>
         </div>
       )}
+
+      {/* Easter Egg Modal */}
+      <EasterEggModal
+        isOpen={easterEggModal.isOpen}
+        onClose={handleCloseEasterEggModal}
+        searchTerm={easterEggModal.searchTerm}
+      />
     </div>
   );
 };

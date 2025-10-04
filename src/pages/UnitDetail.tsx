@@ -148,14 +148,38 @@ const UnitDetail = () => {
                 <thead>
                   <tr>
                     <th>Weapon</th>
-                    <th>Type</th>
-                    <th>Range</th>
-                    <th>Attacks</th>
-                    <th>Skill</th>
-                    <th>Strength</th>
-                    <th>AP</th>
-                    <th>Damage</th>
-                    <th>Abilities</th>
+                    <th>
+                      <span className="header-full">Type</span>
+                      <span className="header-mobile">Type</span>
+                    </th>
+                    <th>
+                      <span className="header-full">Range</span>
+                      <span className="header-mobile">R</span>
+                    </th>
+                    <th>
+                      <span className="header-full">Attacks</span>
+                      <span className="header-mobile">A</span>
+                    </th>
+                    <th>
+                      <span className="header-full">Skill</span>
+                      <span className="header-mobile">BS/WS</span>
+                    </th>
+                    <th>
+                      <span className="header-full">Strength</span>
+                      <span className="header-mobile">S</span>
+                    </th>
+                    <th>
+                      <span className="header-full">AP</span>
+                      <span className="header-mobile">AP</span>
+                    </th>
+                    <th>
+                      <span className="header-full">Damage</span>
+                      <span className="header-mobile">D</span>
+                    </th>
+                    <th>
+                      <span className="header-full">Abilities</span>
+                      <span className="header-mobile">Abilities</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
