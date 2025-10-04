@@ -12,7 +12,7 @@ import './Units.css';
 const LEGENDS_PREFERENCE_KEY = 'grimdarkly-show-legends';
 
 const Units = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [units, setUnits] = useState<Unit[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
