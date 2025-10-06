@@ -228,7 +228,7 @@ const UnitDetail = () => {
           </div>
         )}
 
-        {unit.unitAbilities.length > 0 && (
+        {unit.unitAbilities.length > 0 ? (
           <div className="unit-abilities-section">
             <h2>Unit Abilities ({unit.unitAbilities.length})</h2>
             <div className="abilities-list">
@@ -242,6 +242,24 @@ const UnitDetail = () => {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+        ) : (
+          <div className="unit-abilities-section">
+            <h2>Unit Abilities (0)</h2>
+            <div className="abilities-disclaimer">
+              <p className="disclaimer-text">
+                <em>Some units may be missing abilities. Please report missing datasheet abilities </em>
+                <a 
+                  href="https://github.com/emiller6505/grimdarkly-frontend/issues" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="disclaimer-link"
+                >
+                  here
+                </a>
+                <em>.</em>
+              </p>
             </div>
           </div>
         )}

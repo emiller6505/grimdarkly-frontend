@@ -5,6 +5,73 @@ import FactionCard from '../components/FactionCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import './Factions.css';
 
+// Space Marine subfactions with their lore descriptions
+const SPACE_MARINE_SUBFACTIONS = [
+  {
+    id: 1001,
+    name: 'Blood Angels',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1002,
+    name: 'Dark Angels',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1003,
+    name: 'Ultramarines',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1004,
+    name: 'Space Wolves',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1005,
+    name: 'Iron Hands',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1006,
+    name: 'White Scars',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1007,
+    name: 'Raven Guard',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1008,
+    name: 'Salamanders',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  },
+  {
+    id: 1009,
+    name: 'Imperial Fists',
+    category: { id: 0, name: 'Subfaction' },
+    isSubfaction: true,
+    parentFaction: 'Space Marines'
+  }
+];
+
 const Factions = () => {
   const [factions, setFactions] = useState<Faction[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,8 +111,11 @@ const Factions = () => {
     );
   }
 
+  // Combine main factions with Space Marine subfactions
+  const allFactions = [...factions, ...SPACE_MARINE_SUBFACTIONS];
+  
   // Sort factions alphabetically by name
-  const sortedFactions = [...factions].sort((a, b) => a.name.localeCompare(b.name));
+  const sortedFactions = allFactions.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="factions-page">
@@ -58,7 +128,11 @@ const Factions = () => {
         <div className="summary-stats">
           <div className="summary-stat">
             <span className="stat-number">{factions.length}</span>
-            <span className="stat-label">Total Factions</span>
+            <span className="stat-label">Factions</span>
+          </div>
+          <div className="summary-stat">
+            <span className="stat-number">{SPACE_MARINE_SUBFACTIONS.length}</span>
+            <span className="stat-label">Subfactions</span>
           </div>
         </div>
       </div>

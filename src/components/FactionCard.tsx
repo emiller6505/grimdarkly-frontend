@@ -3,7 +3,10 @@ import type { Faction } from '../types';
 import './FactionCard.css';
 
 interface FactionCardProps {
-  faction: Faction;
+  faction: Faction & {
+    isSubfaction?: boolean;
+    parentFaction?: string;
+  };
 }
 
 const FactionCard = ({ faction }: FactionCardProps) => {
@@ -92,11 +95,11 @@ const FactionCard = ({ faction }: FactionCardProps) => {
     }
     
     if (normalizedFaction.includes('orks')) {
-      return 'Brutal and warlike greenskins who live for battle, growing stronger through combat and spreading across the galaxy.';
+      return 'Brutal and warlike creatures who live for battle, growing stronger through combat and spreading across the galaxy.';
     }
     
     if (normalizedFaction.includes('space') && normalizedFaction.includes('marines') && !normalizedFaction.includes('chaos')) {
-      return 'The Emperor\'s finest warriors, genetically enhanced super-soldiers who are humanity\'s greatest defenders.';
+      return 'The Adeptus Astartes are the Emperor\'s finest warriors, genetically enhanced super-soldiers who are humanity\'s greatest defenders.';
     }
     
     if (normalizedFaction.includes('thousand') && normalizedFaction.includes('sons')) {
@@ -113,6 +116,43 @@ const FactionCard = ({ faction }: FactionCardProps) => {
     
     if (normalizedFaction.includes('world') && normalizedFaction.includes('eaters')) {
       return 'Khorne\'s bloodthirsty berserkers, lost to the rage of the Blood God and seeking only to spill blood in his name.';
+    }
+    
+    // Space Marine Chapter descriptions
+    if (normalizedFaction.includes('blood') && normalizedFaction.includes('angels')) {
+      return 'A subfaction of the Adeptus Astartes, the Blood Angels are noble warriors cursed with the Red Thirst and Black Rage, fighting with unmatched ferocity and artistic grace.';
+    }
+    
+    if (normalizedFaction.includes('dark') && normalizedFaction.includes('angels')) {
+      return 'A subfaction of the Adeptus Astartes, the Dark Angels are secretive and mysterious, guarding ancient secrets and hunting the Fallen with relentless determination.';
+    }
+    
+    if (normalizedFaction.includes('ultramarines')) {
+      return 'A subfaction of the Adeptus Astartes, the Ultramarines are the most disciplined and organized of all Space Marine Chapters, following the Codex Astartes with unwavering devotion.';
+    }
+    
+    if (normalizedFaction.includes('space') && normalizedFaction.includes('wolves')) {
+      return 'A subfaction of the Adeptus Astartes, the Space Wolves are fierce warriors from Fenris who embrace their savage nature and fight with berserker fury.';
+    }
+    
+    if (normalizedFaction.includes('iron') && normalizedFaction.includes('hands')) {
+      return 'A subfaction of the Adeptus Astartes, the Iron Hands are masters of technology and cybernetics, replacing flesh with metal in their quest for perfection.';
+    }
+    
+    if (normalizedFaction.includes('white') && normalizedFaction.includes('scars')) {
+      return 'A subfaction of the Adeptus Astartes, the White Scars are swift and mobile warriors who excel at hit-and-run tactics and lightning-fast strikes.';
+    }
+    
+    if (normalizedFaction.includes('raven') && normalizedFaction.includes('guard')) {
+      return 'A subfaction of the Adeptus Astartes, the Raven Guard are masters of stealth and infiltration, striking from the shadows with surgical precision.';
+    }
+    
+    if (normalizedFaction.includes('salamanders')) {
+      return 'A subfaction of the Adeptus Astartes, the Salamanders are noble warriors who forge their own weapons and protect the innocent with unwavering compassion.';
+    }
+    
+    if (normalizedFaction.includes('imperial') && normalizedFaction.includes('fists')) {
+      return 'A subfaction of the Adeptus Astartes, the Imperial Fists are master defenders and siege specialists, known for their unbreakable resolve and fortification expertise.';
     }
     
     // Fallback for any faction not explicitly handled
@@ -134,7 +174,10 @@ const FactionCard = ({ faction }: FactionCardProps) => {
 
         <div className="faction-actions">
           <Link 
-            to={`/units?faction=${encodeURIComponent(faction.name)}`}
+            to={faction.isSubfaction 
+              ? `/units?keyword=${encodeURIComponent(faction.name)}`
+              : `/units?faction=${encodeURIComponent(faction.name)}`
+            }
             className="btn btn-primary"
           >
             View Units
