@@ -195,7 +195,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading, initialValues }: Sear
           </div>
 
           <div className="filter-group">
-            <label htmlFor="keywords">Keywords</label>
+            <label htmlFor="keywords">Keywords (comma separated)</label>
             <MultiKeywordInput
               appliedKeywords={appliedKeywords}
               onKeywordsChange={handleKeywordsChange}
@@ -356,7 +356,7 @@ const SearchFilters = ({ type, onSearch, onClear, loading, initialValues }: Sear
         </div>
 
         <div className="filter-group">
-          <label htmlFor="keywords">Keywords</label>
+          <label htmlFor="keywords">Keywords (comma separated)</label>
           <MultiKeywordInput
             appliedKeywords={appliedKeywords}
             onKeywordsChange={handleKeywordsChange}
