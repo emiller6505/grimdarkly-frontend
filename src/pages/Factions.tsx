@@ -100,11 +100,11 @@ const Factions = () => {
   if (error) {
     return (
       <div className="factions-page">
-        <div className="page-header">
+        <div className="page-header page-header-fade">
           <h1>Factions</h1>
           <p>Explore the major factions of Warhammer 40K</p>
         </div>
-        <div className="error-message">
+        <div className="error-message content-fade-in">
           <p>{error}</p>
         </div>
       </div>
@@ -119,12 +119,12 @@ const Factions = () => {
 
   return (
     <div className="factions-page">
-      <div className="page-header">
+      <div className="page-header page-header-fade">
         <h1>Factions</h1>
         <p>Explore the major factions of Warhammer 40K and their unique characteristics</p>
       </div>
 
-      <div className="factions-summary">
+      <div className="factions-summary content-fade-in-delayed">
         <div className="summary-stats">
           <div className="summary-stat">
             <span className="stat-number">{factions.length}</span>
@@ -137,10 +137,12 @@ const Factions = () => {
         </div>
       </div>
 
-      <div className="factions-content">
+      <div className="factions-content content-fade-in-delayed-2">
         <div className="factions-grid">
           {sortedFactions.map((faction) => (
-            <FactionCard key={faction.id} faction={faction} />
+            <div key={faction.id} className="grid-item-fade-in">
+              <FactionCard faction={faction} />
+            </div>
           ))}
         </div>
       </div>

@@ -99,12 +99,12 @@ const Weapons = () => {
 
   return (
     <div className="weapons-page">
-      <div className="page-header">
+      <div className="page-header page-header-fade">
         <h1>Weapons</h1>
         <p>Search and explore Warhammer 40K weapons with detailed stats and abilities.</p>
       </div>
 
-      <div className="search-section">
+      <div className="search-section search-section-fade">
         <SearchFilters
           type="weapons"
           onSearch={handleSearch}
@@ -114,7 +114,7 @@ const Weapons = () => {
       </div>
 
       {error && (
-        <div className="error-message">
+        <div className="error-message content-fade-in">
           <p>{error}</p>
           <button onClick={handleClearSearch} className="btn btn-secondary">
             Clear Search
@@ -125,7 +125,7 @@ const Weapons = () => {
       {loading && <LoadingSpinner />}
 
       {!loading && hasSearched && weapons.length === 0 && !error && (
-        <div className="no-results">
+        <div className="no-results content-fade-in">
           <h3>No weapons found</h3>
           <p>Try adjusting your search criteria or clearing the filters.</p>
           <button onClick={handleClearSearch} className="btn btn-primary">
@@ -135,7 +135,7 @@ const Weapons = () => {
       )}
 
       {!loading && weapons.length > 0 && (
-        <div className="results-section">
+        <div className="results-section results-fade-in">
           <div className="results-header">
             <div className="results-title">
               <h2>Search Results</h2>
@@ -152,14 +152,16 @@ const Weapons = () => {
           
           <div className="weapons-grid">
             {sortedWeapons.map((weapon) => (
-              <WeaponCard key={weapon.id} weapon={weapon} />
+              <div key={weapon.id} className="grid-item-fade-in">
+                <WeaponCard weapon={weapon} />
+              </div>
             ))}
           </div>
         </div>
       )}
 
       {!hasSearched && !loading && (
-        <div className="search-prompt">
+        <div className="search-prompt content-fade-in-delayed">
           <h3>Start Your Search</h3>
           <p>Use the filters above to search for specific weapons, or browse by type, range, or stats.</p>
           <div className="search-examples">

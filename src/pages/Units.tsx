@@ -200,12 +200,12 @@ const Units = () => {
 
   return (
     <div className="units-page">
-      <div className="page-header">
+      <div className="page-header page-header-fade">
         <h1>Units</h1>
         <p>Search and explore Warhammer 40K units with detailed stats and abilities.</p>
       </div>
 
-      <div className="search-section">
+      <div className="search-section search-section-fade">
         <SearchFilters
           type="units"
           onSearch={handleSearch}
@@ -216,7 +216,7 @@ const Units = () => {
       </div>
 
       {error && (
-        <div className="error-message">
+        <div className="error-message content-fade-in">
           <p>{error}</p>
           <button onClick={handleClearSearch} className="btn btn-secondary">
             Clear Search
@@ -227,7 +227,7 @@ const Units = () => {
       {loading && <LoadingSpinner />}
 
       {!loading && hasSearched && units.length === 0 && !error && (
-        <div className="no-results">
+        <div className="no-results content-fade-in">
           <h3>No units found</h3>
           <p>Try adjusting your search criteria or clearing the filters.</p>
           <button onClick={handleClearSearch} className="btn btn-primary">
@@ -237,7 +237,7 @@ const Units = () => {
       )}
 
       {!loading && units.length > 0 && (
-        <div className="results-section">
+        <div className="results-section results-fade-in">
           <div className="results-header">
             <div className="results-title">
               <h2>Search Results</h2>
@@ -272,14 +272,16 @@ const Units = () => {
           
           <div className="units-grid">
             {sortedUnits.map((unit) => (
-              <UnitCard key={unit.id} unit={unit} />
+              <div key={unit.id} className="grid-item-fade-in">
+                <UnitCard unit={unit} />
+              </div>
             ))}
           </div>
         </div>
       )}
 
       {!hasSearched && !loading && (
-        <div className="search-prompt">
+        <div className="search-prompt content-fade-in-delayed">
           <h3>Start Your Search</h3>
           <p>Use the filters above to search for specific units, or browse by faction, type, or keywords.</p>
           <div className="search-examples">

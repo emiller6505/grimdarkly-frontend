@@ -339,3 +339,124 @@ input::placeholder {
   background-color: #800000;
   color: white;
 }
+
+/* Content Fade Animations */
+.content-fade-in {
+  animation: contentFadeIn 0.6s ease-out forwards;
+}
+
+.content-fade-in-delayed {
+  animation: contentFadeIn 0.6s ease-out 0.2s both;
+}
+
+.content-fade-in-delayed-2 {
+  animation: contentFadeIn 0.6s ease-out 0.4s both;
+}
+
+.content-fade-in-delayed-3 {
+  animation: contentFadeIn 0.6s ease-out 0.6s both;
+}
+
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered Grid Animations */
+.grid-item-fade-in {
+  animation: gridItemFadeIn 0.5s ease-out forwards;
+}
+
+.grid-item-fade-in:nth-child(1) { animation-delay: 0.1s; }
+.grid-item-fade-in:nth-child(2) { animation-delay: 0.15s; }
+.grid-item-fade-in:nth-child(3) { animation-delay: 0.2s; }
+.grid-item-fade-in:nth-child(4) { animation-delay: 0.25s; }
+.grid-item-fade-in:nth-child(5) { animation-delay: 0.3s; }
+.grid-item-fade-in:nth-child(6) { animation-delay: 0.35s; }
+.grid-item-fade-in:nth-child(7) { animation-delay: 0.4s; }
+.grid-item-fade-in:nth-child(8) { animation-delay: 0.45s; }
+.grid-item-fade-in:nth-child(9) { animation-delay: 0.5s; }
+.grid-item-fade-in:nth-child(10) { animation-delay: 0.55s; }
+.grid-item-fade-in:nth-child(11) { animation-delay: 0.6s; }
+.grid-item-fade-in:nth-child(12) { animation-delay: 0.65s; }
+
+@keyframes gridItemFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Search Section Animations */
+.search-section-fade {
+  animation: searchSectionFade 0.7s ease-out forwards;
+}
+
+@keyframes searchSectionFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Results Section Animations */
+.results-fade-in {
+  animation: resultsFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes resultsFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page Header Animations */
+.page-header-fade {
+  animation: pageHeaderFade 0.5s ease-out forwards;
+}
+
+@keyframes pageHeaderFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .content-fade-in,
+  .content-fade-in-delayed,
+  .content-fade-in-delayed-2,
+  .content-fade-in-delayed-3,
+  .grid-item-fade-in,
+  .search-section-fade,
+  .results-fade-in,
+  .page-header-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

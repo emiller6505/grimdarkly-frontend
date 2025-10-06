@@ -4,7 +4,7 @@ import './Home.css';
 const Home = () => {
   return (
     <div className="home">
-      <div className="hero">
+      <div className="hero page-header-fade">
         <h1>Welcome to the Grimdark Grimoire</h1>
         <p className="hero-subtitle">
           Your comprehensive Warhammer 40K database for units, weapons, and factions.
@@ -25,9 +25,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="features">
+      <div className="features content-fade-in-delayed">
         <div className="grid grid-cols-3">
-          <div className="feature-card">
+          <div className="feature-card grid-item-fade-in">
             <div className="feature-icon">👥</div>
             <h3>Units</h3>
             <p>
@@ -39,7 +39,7 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card grid-item-fade-in">
             <div className="feature-icon">⚔️</div>
             <h3>Weapons</h3>
             <p>
@@ -51,7 +51,7 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card grid-item-fade-in">
             <div className="feature-icon">🏛️</div>
             <h3>Factions</h3>
             <p>
@@ -65,7 +65,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="search-preview">
+      <div className="search-preview content-fade-in-delayed-2">
         <h2>Quick Search</h2>
         <p>Start your search across the vast database of Warhammer 40K data</p>
         <div className="search-links">
