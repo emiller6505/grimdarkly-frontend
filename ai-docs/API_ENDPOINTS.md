@@ -93,7 +93,7 @@ GET /api/factions
 
 **Parameters**:
 - `name` (string, optional): Unit name (partial matching)
-- `faction` (string, optional): Faction name
+- `faction` (string, optional): Faction name (supports main factions and sub-factions)
 - `unitType` (string, optional): "CHARACTER", "BATTLELINE", or "OTHER"
 - `keyword` (string, optional): Comma-separated keywords
 - `minToughness` (number, optional): Minimum toughness value
@@ -103,16 +103,32 @@ GET /api/factions
 - `minMovement` (number, optional): Minimum movement value
 - `maxMovement` (number, optional): Maximum movement value
 
+**Search Logic**:
+- **AND Logic**: All provided parameters must match simultaneously
+- **Faction Search**: 
+  - **Main Factions**: Exact match (e.g., "World Eaters", "Chaos Space Marines", "Space Marines")
+  - **Sub-Factions**: Keyword match for Space Marine chapters (e.g., "Dark Angels", "Blood Angels", "Ultramarines")
+  - **Chaos Factions**: Treated as main factions, not sub-factions
+
 **Request Examples**:
 ```bash
 # Search by name
 GET /api/units/search?name=marine
+
+# Search by main faction (exact match)
+GET /api/units/search?faction=World%20Eaters&name=berzerker
+
+# Search by sub-faction (Space Marine chapters)
+GET /api/units/search?faction=Dark%20Angels&name=marine
 
 # Search by faction and type
 GET /api/units/search?faction=Space%20Marines&unitType=BATTLELINE
 
 # Search with stat ranges
 GET /api/units/search?minToughness=4&maxToughness=6&minWounds=2
+
+# Complex search with multiple AND conditions
+GET /api/units/search?name=marine&faction=Ultramarines&unitType=CHARACTER&minToughness=4
 ```
 
 **Response**:

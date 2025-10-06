@@ -127,7 +127,9 @@ The frontend communicates with the Grimdarkly backend API through:
 - **Keywords API**: `/api/keywords/search` - Search keywords and sub-factions
 
 ### Enhanced Search Features
-- **Sub-Faction Search**: "Dark Angels", "Blood Angels", "Ultramarines", "Space Wolves"
+- **AND Logic**: All search conditions must be met simultaneously for precise results
+- **Main Faction Search**: Exact matching for factions like "World Eaters", "Chaos Space Marines", "Space Marines"
+- **Sub-Faction Search**: Keyword matching for Space Marine chapters like "Dark Angels", "Blood Angels", "Ultramarines"
 - **Weapon Keyword Search**: Search weapons by abilities like "rapid fire", "lethal hits", "sustained hits"
 - **Advanced Filtering**: Multiple filter combinations with real-time results
 - **Case Insensitive**: All searches work with any capitalization
