@@ -98,7 +98,6 @@ src/
 │   ├── SearchFilters.tsx # Search and filter interface
 │   ├── Tag.tsx         # Reusable tag component
 │   ├── TagList.tsx     # Tag list with expand/collapse
-│   ├── EasterEggModal.tsx # Easter egg modal component
 │   └── LoadingSpinner.tsx # Loading indicator
 ├── pages/              # Page components
 │   ├── Home.tsx        # Landing page
@@ -150,12 +149,7 @@ The app uses a custom CSS theme inspired by Warhammer 40K aesthetics:
 ## Recent Features
 
 ### 🎭 Easter Egg System
-Discover hidden surprises by searching for specific phrases in the Unit Name search box:
-- **"Bruce Dickinson"** - The Iron Rockstar of Warhammer 40K
-- **"Will Ferrell"** - The Comedic Champion of the Imperium
-- **"Christopher Walken"** - The Master of Dramatic Pauses
-- **"Cowbell"** - The Sacred Instrument of the Imperium
-- **"More Cowbell"** - The Ultimate Sacred Instrument
+Discover hidden surprises by searching for specific phrases in the Unit Name search box. Hint: the dynamite sound of 1976...
 
 Each easter egg displays a themed modal with unique content and a YouTube video player.
 
