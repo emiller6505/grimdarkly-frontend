@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Unit } from '../types';
+import TagList from './TagList';
 import './UnitCard.css';
+import '../styles/tags.css';
 
 interface UnitCardProps {
   unit: Unit;
@@ -68,91 +70,32 @@ const UnitCard = ({ unit }: UnitCardProps) => {
 
       {unit.weapons.length > 0 && (
         <div className="unit-weapons">
-          <h4>Weapons ({unit.weapons.length})</h4>
-          <div className="weapons-list">
-            {(weaponsExpanded ? unit.weapons : unit.weapons.slice(0, 3)).map((weapon) => (
-              <span key={weapon.id} className="weapon-tag">
-                {weapon.name}
-              </span>
-            ))}
-            {unit.weapons.length > 3 && !weaponsExpanded && (
-              <span 
-                className="weapon-tag more clickable"
-                onClick={() => setWeaponsExpanded(true)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setWeaponsExpanded(true);
-                  }
-                }}
-              >
-                +{unit.weapons.length - 3} more
-              </span>
-            )}
-            {weaponsExpanded && unit.weapons.length > 3 && (
-              <span 
-                className="weapon-tag more clickable"
-                onClick={() => setWeaponsExpanded(false)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setWeaponsExpanded(false);
-                  }
-                }}
-              >
-                Show less
-              </span>
-            )}
-          </div>
+          <TagList
+            title={`Weapons (${unit.weapons.length})`}
+            items={unit.weapons.map(weapon => ({
+              id: weapon.id,
+              name: weapon.name
+            }))}
+            variant="weapon"
+            maxVisible={3}
+            expanded={weaponsExpanded}
+            onToggleExpanded={() => setWeaponsExpanded(!weaponsExpanded)}
+          />
         </div>
       )}
 
       {unit.keywords.length > 0 && (
         <div className="unit-keywords">
-          <h4>Keywords</h4>
-          <div className="keywords-list">
-            {(keywordsExpanded ? unit.keywords : unit.keywords.slice(0, 4)).map((keyword, index) => (
-              <span key={index} className="keyword-tag">
-                {keyword.name}
-              </span>
-            ))}
-            {unit.keywords.length > 4 && !keywordsExpanded && (
-              <span 
-                className="keyword-tag more clickable"
-                onClick={() => setKeywordsExpanded(true)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setKeywordsExpanded(true);
-                  }
-                }}
-              >
-                +{unit.keywords.length - 4} more
-              </span>
-            )}
-            {keywordsExpanded && unit.keywords.length > 4 && (
-              <span 
-                className="keyword-tag more clickable"
-                onClick={() => setKeywordsExpanded(false)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setKeywordsExpanded(false);
-                  }
-                }}
-              >
-                Show less
-              </span>
-            )}
-          </div>
+          <TagList
+            title="Keywords"
+            items={unit.keywords.map(keyword => ({
+              name: keyword.name
+            }))}
+            variant="keyword"
+            maxVisible={4}
+            expanded={keywordsExpanded}
+            onToggleExpanded={() => setKeywordsExpanded(!keywordsExpanded)}
+          />
         </div>
       )}
 

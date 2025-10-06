@@ -68,13 +68,19 @@ const WeaponDetail = () => {
   }, [weapon, selectedFaction]);
 
   if (loading) {
-    return <LoadingSpinner text="Loading weapon details..." />;
+    return (
+      <div className="weapon-detail">
+        <div className="detail-loading">
+          <LoadingSpinner text="Loading weapon details..." />
+        </div>
+      </div>
+    );
   }
 
   if (error) {
     return (
       <div className="weapon-detail">
-        <div className="error-message">
+        <div className="detail-error">
           <h2>Error</h2>
           <p>{error}</p>
           <Link to="/weapons" className="btn btn-primary">
@@ -88,7 +94,7 @@ const WeaponDetail = () => {
   if (!weapon) {
     return (
       <div className="weapon-detail">
-        <div className="error-message">
+        <div className="detail-error">
           <h2>Weapon Not Found</h2>
           <p>The requested weapon could not be found.</p>
           <Link to="/weapons" className="btn btn-primary">

@@ -38,13 +38,19 @@ const UnitDetail = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner text="Loading unit details..." />;
+    return (
+      <div className="unit-detail">
+        <div className="detail-loading">
+          <LoadingSpinner text="Loading unit details..." />
+        </div>
+      </div>
+    );
   }
 
   if (error) {
     return (
       <div className="unit-detail">
-        <div className="error-message">
+        <div className="detail-error">
           <h2>Error</h2>
           <p>{error}</p>
           <Link to="/units" className="btn btn-primary">

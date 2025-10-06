@@ -90,6 +90,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  align-items: flex-start;
+  text-align: left;
 }
 
 /* More specific selector to override any inherited styles */
@@ -97,6 +99,7 @@
   color: var(--text-secondary);
   font-weight: 400;
   font-size: 0.875rem;
+  text-align: left;
 }
 
 /* More specific selector for faction category */
@@ -161,8 +164,6 @@
   margin-bottom: var(--spacing-sm);
 }
 
-.unit-card .unit-weapons h4,
-.unit-card .unit-keywords h4,
 .unit-card .unit-configurations h4 {
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -172,49 +173,6 @@
   font-weight: 500;
 }
 
-.weapons-list,
-.keywords-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-
-.weapon-tag,
-.keyword-tag {
-  display: inline-block;
-  padding: 2px var(--spacing-xs);
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
-  border: 1px solid var(--border-color);
-}
-
-.weapon-tag.more,
-.keyword-tag.more {
-  background-color: var(--accent-blue);
-  color: white;
-  border-color: var(--accent-blue);
-}
-
-.weapon-tag.more.clickable,
-.keyword-tag.more.clickable {
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.weapon-tag.more.clickable:hover,
-.keyword-tag.more.clickable:hover {
-  background-color: #1d4ed8;
-  border-color: #1d4ed8;
-  transform: translateY(-1px);
-}
-
-.weapon-tag.more.clickable:focus,
-.keyword-tag.more.clickable:focus {
-  outline: 2px solid var(--accent-gold);
-  outline-offset: 1px;
-}
 
 .configurations-list {
   display: flex;

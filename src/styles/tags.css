@@ -1,0 +1,72 @@
+/* ========================================
+   IMPERIAL TAG SYSTEM
+   Reusable tag components for consistent UI
+   ======================================== */
+
+/* Base tag styles - used by both keywords and abilities */
+.tag {
+  display: inline-block;
+  padding: 2px var(--spacing-xs);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+/* Tag list container */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+/* More tag variant */
+.tag.more {
+  background-color: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+}
+
+/* Clickable more tag */
+.tag.more.clickable {
+  cursor: pointer;
+}
+
+.tag.more.clickable:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.tag.more.clickable:focus {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 1px;
+}
+
+/* Section headers for tag lists */
+.tag-section h4 {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* Ability-specific tag styling */
+.tag.ability-tag {
+  /* Inherits base tag styles */
+}
+
+/* Keyword-specific tag styling */
+.tag.keyword-tag {
+  /* Inherits base tag styles */
+}
+
+/* Weapon-specific tag styling */
+.tag.weapon-tag {
+  /* Inherits base tag styles */
+}

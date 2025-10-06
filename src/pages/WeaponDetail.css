@@ -2,6 +2,18 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--spacing-lg) 0;
+  animation: detailPageEnter 0.6s ease-out;
+}
+
+@keyframes detailPageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Header Section */
@@ -11,6 +23,55 @@
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
+  animation: contentSectionFadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes contentSectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading and Error States */
+.detail-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.detail-error {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .weapon-detail,
+  .weapon-detail-header,
+  .weapon-stats-section,
+  .weapon-abilities-section,
+  .weapon-units-section,
+  .detail-loading,
+  .detail-error {
+    animation: none;
+  }
 }
 
 .breadcrumb {
@@ -82,6 +143,7 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
+  animation: contentSectionFadeIn 0.8s ease-out 0.4s both;
 }
 
 .weapon-stats-grid {
@@ -124,6 +186,7 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
+  animation: contentSectionFadeIn 0.8s ease-out 0.6s both;
 }
 
 .weapon-abilities-list {
@@ -174,6 +237,7 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
+  animation: contentSectionFadeIn 0.8s ease-out 0.8s both;
 }
 
 .weapon-units-header {

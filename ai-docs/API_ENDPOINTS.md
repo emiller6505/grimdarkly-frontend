@@ -223,6 +223,7 @@ GET /api/units/name/Rubric%20Marines
 **Parameters**:
 - `name` (string, optional): Weapon name (partial matching)
 - `weaponType` (string, optional): "MELEE" or "RANGED"
+- `keyword` (string, optional): Weapon abilities/keywords (comma-separated, partial matching)
 - `minRange` (number, optional): Minimum range value
 - `maxRange` (number, optional): Maximum range value
 - `ap` (number, optional): Armor Penetration value
@@ -238,6 +239,9 @@ GET /api/weapons/search?weaponType=RANGED&minRange=20&maxRange=30
 
 # Search with AP
 GET /api/weapons/search?ap=-1&attacks=2
+
+# Search by keyword
+GET /api/weapons/search?keyword=rapid%20fire
 ```
 
 **Response**:

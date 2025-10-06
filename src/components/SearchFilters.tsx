@@ -286,6 +286,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading, initialValues }: Sear
             <div className="active-filter-tags">
             {Object.entries(currentFilters).map(([key, value]) => {
               if (value === undefined || value === '' || value === null) return null;
+              // Skip showing 'keyword' field if we have appliedKeywords to avoid duplication
+              if (key === 'keyword' && appliedKeywords.length > 0) return null;
               return (
                 <span key={key} className="active-filter-tag">
                   {key}: {String(value)}
@@ -416,6 +418,8 @@ const SearchFilters = ({ type, onSearch, onClear, loading, initialValues }: Sear
           <div className="active-filter-tags">
             {Object.entries(currentFilters).map(([key, value]) => {
               if (value === undefined || value === '' || value === null) return null;
+              // Skip showing 'keyword' field if we have appliedKeywords to avoid duplication
+              if (key === 'keyword' && appliedKeywords.length > 0) return null;
               return (
                 <span key={key} className="active-filter-tag">
                   {key}: {value}

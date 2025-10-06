@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import type { Weapon } from '../types';
+import TagList from './TagList';
 import './WeaponCard.css';
+import '../styles/tags.css';
 
 interface WeaponCardProps {
   weapon: Weapon;
@@ -73,40 +75,29 @@ const WeaponCard = ({ weapon }: WeaponCardProps) => {
 
       {weapon.abilities.length > 0 && (
         <div className="weapon-abilities">
-          <h4>Abilities ({weapon.abilities.length})</h4>
-          <div className="abilities-list">
-            {weapon.abilities.slice(0, 3).map((abilityValue, index) => (
-              <div key={index} className="ability-item">
-                <span className="ability-name">{abilityValue.name}</span>
-                {abilityValue.value && (
-                  <span className="ability-value">({abilityValue.value})</span>
-                )}
-              </div>
-            ))}
-            {weapon.abilities.length > 3 && (
-              <div className="ability-item more">
-                +{weapon.abilities.length - 3} more abilities
-              </div>
-            )}
-          </div>
+          <TagList
+            title={`Abilities (${weapon.abilities.length})`}
+            items={weapon.abilities.map(ability => ({
+              name: ability.name,
+              value: ability.value
+            }))}
+            variant="ability"
+            maxVisible={3}
+          />
         </div>
       )}
 
       {weapon.units.length > 0 && (
         <div className="weapon-units">
-          <h4>Used by ({weapon.units.length} units)</h4>
-          <div className="units-list">
-            {weapon.units.slice(0, 3).map((unit) => (
-              <span key={unit.id} className="unit-tag">
-                {unit.name}
-              </span>
-            ))}
-            {weapon.units.length > 3 && (
-              <span className="unit-tag more">
-                +{weapon.units.length - 3} more
-              </span>
-            )}
-          </div>
+          <TagList
+            title={`Used by (${weapon.units.length} units)`}
+            items={weapon.units.map(unit => ({
+              id: unit.id,
+              name: unit.name
+            }))}
+            variant="weapon"
+            maxVisible={3}
+          />
         </div>
       )}
 
